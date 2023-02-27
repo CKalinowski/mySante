@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OngletDeroulant extends StatelessWidget {
-  OngletDeroulant({
+  const OngletDeroulant({
     Key? key,
   }) : super(key: key);
   @override
@@ -19,11 +20,10 @@ class OngletDeroulant extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: const Color(0xffffffff),
                   borderRadius: BorderRadius.circular(20.0),
-                  border:
-                      Border.all(width: 1.0, color: const Color(0xff707070)),
-                  boxShadow: [
+                  border: Border.all(width: 1.0, color: const Color(0xff707070)),
+                  boxShadow: const [
                     BoxShadow(
-                      color: const Color(0x29000000),
+                      color: Color(0x29000000),
                       offset: Offset(5, 5),
                       blurRadius: 6,
                     ),
@@ -35,8 +35,7 @@ class OngletDeroulant extends StatelessWidget {
                 Pin(size: 30.0, middle: 0.4483),
                 child: Text(
                   'Dépistage',
-                  style: TextStyle(
-                    fontFamily: 'Lato',
+                  style: GoogleFonts.lato(
                     fontSize: 25,
                     color: const Color(0xff707070),
                     fontWeight: FontWeight.w500,
@@ -48,10 +47,9 @@ class OngletDeroulant extends StatelessWidget {
                 Pin(size: 12.0, start: 27.0),
                 Pin(size: 12.0, middle: 0.5106),
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xff54cbc4),
-                    borderRadius:
-                        BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
+                  decoration: const BoxDecoration(
+                    color: Color(0xff54cbc4),
+                    borderRadius: BorderRadius.all(Radius.elliptical(9999.0, 9999.0)),
                   ),
                 ),
               ),

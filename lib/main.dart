@@ -1,6 +1,5 @@
+import 'package:chloe/disclaimer.dart';
 import 'package:flutter/material.dart';
-
-import 'disclaimer.dart';
 
 void main() {
   runApp(const MyApp());

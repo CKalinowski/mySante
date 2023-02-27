@@ -7,9 +7,8 @@ import './btn_je_comprend.dart';
 import './page1.dart';
 
 class Disclaimer extends StatelessWidget {
-  const Disclaimer({
-    Key? key,
-  }) : super(key: key);
+  const Disclaimer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +24,7 @@ class Disclaimer extends StatelessWidget {
           Pinned.fromPins(
             Pin(start: 2.0, end: 1.0),
             Pin(size: 427.0, start: -47.0),
-            child:
-                // Adobe XD layer: '4' (shape)
-                Container(
+            child: Container(
               decoration: BoxDecoration(
                 image: const DecorationImage(
                   image: AssetImage('assets/images/logo.png'),
@@ -79,14 +76,13 @@ class Disclaimer extends StatelessWidget {
                   Stack(
                     children: <Widget>[
                       SizedBox.expand(
-                          child: SvgPicture.string(
-                        _svg_mtrgjv,
-                        allowDrawingOutsideViewBox: true,
-                        fit: BoxFit.fill,
-                      )),
-                      Container(
-                        decoration: const BoxDecoration(),
+                        child: SvgPicture.string(
+                          _svg_mtrgjv,
+                          allowDrawingOutsideViewBox: true,
+                          fit: BoxFit.fill,
+                        ),
                       ),
+                      Container(decoration: const BoxDecoration()),
                     ],
                   ),
                 ],
@@ -97,14 +93,14 @@ class Disclaimer extends StatelessWidget {
             Pin(start: 63.0, end: 63.0),
             Pin(size: 140.0, middle: 0.6843),
             child: const Text(
-              'Cette application a été crée à \nbut informatif et ne remplace \nen aucun cas la consultation \nchez un professionnel de la santé.\n \nMerci de votre compréhension.',
+              'Cette application a été crée à but informatif et ne remplace en aucun cas la consultation chez un professionnel de la santé. Merci de votre compréhension.',
               style: TextStyle(
                 fontFamily: 'Segoe UI',
                 fontSize: 20,
                 color: Color(0xff707070),
               ),
               textAlign: TextAlign.center,
-              softWrap: false,
+              softWrap: true,
             ),
           ),
           Align(
@@ -112,16 +108,14 @@ class Disclaimer extends StatelessWidget {
             child: SizedBox(
               width: 289.0,
               height: 56.0,
-              child:
-                  // Adobe XD layer: 'BTN je comprend' (component)
-                  PageLink(
+              child: PageLink(
                 links: [
                   PageLinkInfo(
                     duration: 5,
-                    pageBuilder: () => Page1(),
+                    pageBuilder: () => const Page1(),
                   ),
                 ],
-                child: BTNJeComprend(),
+                child: const BTNJeComprend(),
               ),
             ),
           ),

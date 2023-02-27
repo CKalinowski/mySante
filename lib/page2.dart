@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
+import 'package:google_fonts/google_fonts.dart';
 import './header.dart';
 import './btn_voir.dart';
 import './page3.dart';
@@ -20,9 +21,7 @@ class Page2 extends StatelessWidget {
           Pinned.fromPins(
             Pin(start: 0.0, end: 0.0),
             Pin(size: 172.0, start: -15.0),
-            child:
-                // Adobe XD layer: 'header' (component)
-                Header(),
+            child: Header(),
           ),
           Pinned.fromPins(
             Pin(start: 7.0, end: 9.0),
@@ -42,17 +41,16 @@ class Page2 extends StatelessWidget {
               ),
             ),
           ),
-          const Align(
-            alignment: Alignment(0.0, -0.627),
+          Align(
+            alignment: const Alignment(0.0, -0.627),
             child: SizedBox(
-              width: 142.0,
+              width: 145.0,
               height: 30.0,
               child: Text(
                 'Vos résultats',
-                style: TextStyle(
-                  fontFamily: 'Lato',
+                style: GoogleFonts.lato(
                   fontSize: 25,
-                  color: Color(0xff707070),
+                  color: const Color(0xff707070),
                   fontWeight: FontWeight.w700,
                 ),
                 textAlign: TextAlign.center,
@@ -63,35 +61,32 @@ class Page2 extends StatelessWidget {
           Pinned.fromPins(
             Pin(start: 23.0, end: 43.0),
             Pin(size: 60.0, middle: 0.2626),
-            child: const Text(
-              'Voici les résultats possibles liés à \nvos symptômes :',
-              style: TextStyle(
-                fontFamily: 'Lato',
+            child: Text(
+              'Voici les résultats possibles liés à vos symptômes :',
+              style: GoogleFonts.lato(
                 fontSize: 25,
-                color: Color(0xff707070),
+                color: const Color(0xff707070),
                 fontWeight: FontWeight.w500,
               ),
-              softWrap: false,
+              softWrap: true,
             ),
           ),
           Pinned.fromPins(
             Pin(size: 118.0, end: 30.0),
             Pin(size: 56.0, middle: 0.3836),
-            child:
-                // Adobe XD layer: 'BTN voir +' (component)
-                PageLink(
+            child: PageLink(
               links: [
                 PageLinkInfo(
                   duration: 5,
                   pageBuilder: () => Page3(),
                 ),
               ],
-              child: BTNVoir(),
+              child: const BTNVoir(),
             ),
           ),
           Pinned.fromPins(
             Pin(size: 140.0, start: 45.0),
-            Pin(size: 115.0, end: 104.0),
+            Pin(size: 135.0, end: 90.0),
             child: const Text(
               'Symptôme 1\nSymptôme 2\nSymptôme 3\nSymptôme 4',
               style: TextStyle(
@@ -106,7 +101,7 @@ class Page2 extends StatelessWidget {
           ),
           Pinned.fromPins(
             Pin(size: 12.0, start: 23.0),
-            Pin(size: 12.0, middle: 0.7826),
+            Pin(size: 12.0, middle: 0.775),
             child: Container(
               decoration: const BoxDecoration(
                 color: Color(0xff54cbc4),
@@ -116,7 +111,7 @@ class Page2 extends StatelessWidget {
           ),
           Pinned.fromPins(
             Pin(size: 12.0, start: 23.0),
-            Pin(size: 12.0, end: 168.0),
+            Pin(size: 12.0, end: 165.0),
             child: Container(
               decoration: const BoxDecoration(
                 color: Color(0xff54cbc4),
@@ -126,7 +121,7 @@ class Page2 extends StatelessWidget {
           ),
           Pinned.fromPins(
             Pin(size: 12.0, start: 23.0),
-            Pin(size: 11.0, end: 106.0),
+            Pin(size: 11.0, end: 100.0),
             child: Container(
               decoration: const BoxDecoration(
                 color: Color(0xff54cbc4),
@@ -136,7 +131,7 @@ class Page2 extends StatelessWidget {
           ),
           Pinned.fromPins(
             Pin(size: 12.0, start: 23.0),
-            Pin(size: 11.0, end: 137.0),
+            Pin(size: 11.0, end: 135.0),
             child: Container(
               decoration: const BoxDecoration(
                 color: Color(0xff54cbc4),
@@ -147,12 +142,11 @@ class Page2 extends StatelessWidget {
           Pinned.fromPins(
             Pin(size: 108.0, start: 61.0),
             Pin(size: 30.0, middle: 0.3869),
-            child: const Text(
+            child: Text(
               'Maladie 1',
-              style: TextStyle(
-                fontFamily: 'Lato',
+              style: GoogleFonts.lato(
                 fontSize: 25,
-                color: Color(0xff707070),
+                color: const Color(0xff707070),
                 fontWeight: FontWeight.w500,
               ),
               softWrap: false,
@@ -171,27 +165,24 @@ class Page2 extends StatelessWidget {
           Pinned.fromPins(
             Pin(size: 118.0, end: 26.0),
             Pin(size: 56.0, middle: 0.468),
-            child:
-                // Adobe XD layer: 'BTN voir +' (component)
-                PageLink(
+            child: PageLink(
               links: [
                 PageLinkInfo(
                   duration: 5,
                   pageBuilder: () => Page3(),
                 ),
               ],
-              child: BTNVoir(),
+              child: const BTNVoir(),
             ),
           ),
           Pinned.fromPins(
             Pin(size: 108.0, start: 61.0),
             Pin(size: 30.0, middle: 0.469),
-            child: const Text(
+            child: Text(
               'Maladie 2',
-              style: TextStyle(
-                fontFamily: 'Lato',
+              style: GoogleFonts.lato(
                 fontSize: 25,
-                color: Color(0xff707070),
+                color: const Color(0xff707070),
                 fontWeight: FontWeight.w500,
               ),
               softWrap: false,
@@ -210,27 +201,24 @@ class Page2 extends StatelessWidget {
           Pinned.fromPins(
             Pin(size: 118.0, end: 26.0),
             Pin(size: 56.0, middle: 0.5525),
-            child:
-                // Adobe XD layer: 'BTN voir +' (component)
-                PageLink(
+            child: PageLink(
               links: [
                 PageLinkInfo(
                   duration: 5,
                   pageBuilder: () => Page3(),
                 ),
               ],
-              child: BTNVoir(),
+              child: const BTNVoir(),
             ),
           ),
           Pinned.fromPins(
             Pin(size: 108.0, start: 61.0),
             Pin(size: 30.0, middle: 0.551),
-            child: const Text(
+            child: Text(
               'Maladie 3',
-              style: TextStyle(
-                fontFamily: 'Lato',
+              style: GoogleFonts.lato(
                 fontSize: 25,
-                color: Color(0xff707070),
+                color: const Color(0xff707070),
                 fontWeight: FontWeight.w500,
               ),
               softWrap: false,
@@ -249,29 +237,26 @@ class Page2 extends StatelessWidget {
           Pinned.fromPins(
             Pin(size: 118.0, end: 26.0),
             Pin(size: 56.0, middle: 0.637),
-            child:
-                // Adobe XD layer: 'BTN voir +' (component)
-                PageLink(
+            child: PageLink(
               links: [
                 PageLinkInfo(
                   duration: 5,
                   pageBuilder: () => Page3(),
                 ),
               ],
-              child: BTNVoir(),
+              child: const BTNVoir(),
             ),
           ),
-          const Align(
-            alignment: Alignment(-0.596, 0.266),
+          Align(
+            alignment: const Alignment(-0.596, 0.266),
             child: SizedBox(
               width: 108.0,
               height: 30.0,
               child: Text(
                 'Maladie 4',
-                style: TextStyle(
-                  fontFamily: 'Lato',
+                style: GoogleFonts.lato(
                   fontSize: 25,
-                  color: Color(0xff707070),
+                  color: const Color(0xff707070),
                   fontWeight: FontWeight.w500,
                 ),
                 softWrap: false,
@@ -291,9 +276,7 @@ class Page2 extends StatelessWidget {
           Pinned.fromPins(
             Pin(start: 71.0, end: 70.0),
             Pin(size: 56.0, end: 19.0),
-            child:
-                // Adobe XD layer: 'btn resultat' (component)
-                PageLink(
+            child: PageLink(
               links: [
                 PageLinkInfo(
                   duration: 5,
@@ -306,12 +289,11 @@ class Page2 extends StatelessWidget {
           Pinned.fromPins(
             Pin(start: 18.0, end: 31.0),
             Pin(size: 19.0, start: 21.0),
-            child: const Text(
+            child: Text(
               '< Retour',
-              style: TextStyle(
-                fontFamily: 'Lato',
+              style: GoogleFonts.lato(
                 fontSize: 16,
-                color: Color(0xffffffff),
+                color: const Color(0xffffffff),
               ),
             ),
           ),

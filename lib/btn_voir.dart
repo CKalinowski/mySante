@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 
 class BTNVoir extends StatelessWidget {
-  BTNVoir({
+  const BTNVoir({
     Key? key,
   }) : super(key: key);
   @override
@@ -17,13 +17,13 @@ class BTNVoir extends StatelessWidget {
         ),
         Pinned.fromPins(
           Pin(start: 18.0, end: 18.0),
-          Pin(size: 25.0, middle: 0.6452),
-          child: Text(
+          Pin(size: 35.0, middle: 0.6452),
+          child: const Text(
             'Voir +',
             style: TextStyle(
               fontFamily: 'Segoe UI',
               fontSize: 25,
-              color: const Color(0xffffffff),
+              color: Color(0xffffffff),
               fontWeight: FontWeight.w700,
             ),
             textAlign: TextAlign.center,

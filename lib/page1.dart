@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
+import 'package:google_fonts/google_fonts.dart';
 import './header.dart';
 import './choix_symptomes.dart';
 import './btn_resultat.dart';
@@ -7,7 +8,7 @@ import './page2.dart';
 import 'package:adobe_xd/page_link.dart';
 
 class Page1 extends StatelessWidget {
-  const Page1({Key? key}) : super(key: key);
+  const Page1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +19,7 @@ class Page1 extends StatelessWidget {
           Pinned.fromPins(
             Pin(start: 0.0, end: 0.0),
             Pin(size: 172.0, start: -15.0),
-            child:
-                // Adobe XD layer: 'header' (component)
-                Header(),
+            child: Header(),
           ),
           Pinned.fromPins(
             Pin(start: 7.0, end: 9.0),
@@ -43,12 +42,11 @@ class Page1 extends StatelessWidget {
           Pinned.fromPins(
             Pin(start: 58.0, end: 58.0),
             Pin(size: 30.0, middle: 0.1863),
-            child: const Text(
+            child: Text(
               'Quels sont vos symptômes ?',
-              style: TextStyle(
-                fontFamily: 'Lato',
+              style: GoogleFonts.lato(
                 fontSize: 25,
-                color: Color(0xff707070),
+                color: const Color(0xff707070),
                 fontWeight: FontWeight.w700,
               ),
               textAlign: TextAlign.center,
@@ -58,12 +56,11 @@ class Page1 extends StatelessWidget {
           Pinned.fromPins(
             Pin(size: 141.0, start: 23.0),
             Pin(size: 30.0, middle: 0.2539),
-            child: const Text(
+            child: Text(
               'Symptômes :',
-              style: TextStyle(
-                fontFamily: 'Lato',
+              style: GoogleFonts.lato(
                 fontSize: 25,
-                color: Color(0xff707070),
+                color: const Color(0xff707070),
                 fontWeight: FontWeight.w500,
               ),
               softWrap: false,
@@ -72,12 +69,11 @@ class Page1 extends StatelessWidget {
           Pinned.fromPins(
             Pin(size: 125.0, start: 23.0),
             Pin(size: 30.0, middle: 0.4024),
-            child: const Text(
+            child: Text(
               'Quantifier :',
-              style: TextStyle(
-                fontFamily: 'Lato',
+              style: GoogleFonts.lato(
                 fontSize: 25,
-                color: Color(0xff707070),
+                color: const Color(0xff707070),
                 fontWeight: FontWeight.w500,
               ),
               softWrap: false,
@@ -96,9 +92,7 @@ class Page1 extends StatelessWidget {
           Pinned.fromPins(
             Pin(start: 23.0, end: 22.0),
             Pin(size: 171.0, middle: 0.3837),
-            child:
-                // Adobe XD layer: 'Choix symptomes' (component)
-                ChoixSymptomes(),
+            child: ChoixSymptomes(),
           ),
           Pinned.fromPins(
             Pin(start: 77.0, end: 78.0),
@@ -108,7 +102,7 @@ class Page1 extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: const Alignment(0.322, -0.072),
+            alignment: const Alignment(0.36, -0.072),
             child: Container(
               width: 20.0,
               height: 20.0,
@@ -118,17 +112,16 @@ class Page1 extends StatelessWidget {
               ),
             ),
           ),
-          const Align(
-            alignment: Alignment(0.003, 0.072),
+          Align(
+            alignment: const Alignment(0.003, 0.072),
             child: SizedBox(
               width: 113.0,
               height: 68.0,
               child: Text(
                 '75%',
-                style: TextStyle(
-                  fontFamily: 'Lato',
+                style: GoogleFonts.lato(
                   fontSize: 57,
-                  color: Color(0xff54cbc4),
+                  color: const Color(0xff54cbc4),
                   fontWeight: FontWeight.w700,
                 ),
                 softWrap: false,
@@ -149,7 +142,7 @@ class Page1 extends StatelessWidget {
             alignment: Alignment(0.0, 0.31),
             child: SizedBox(
               width: 108.0,
-              height: 25.0,
+              height: 35.0,
               child: Text(
                 'Valider',
                 style: TextStyle(
@@ -164,8 +157,8 @@ class Page1 extends StatelessWidget {
             ),
           ),
           Pinned.fromPins(
-            Pin(size: 140.0, start: 45.0),
-            Pin(size: 115.0, end: 104.0),
+            Pin(size: 150.0, start: 35.0),
+            Pin(size: 135.0, end: 92.0),
             child: const Text(
               'Symptôme 1\nSymptôme 2\nSymptôme 3\nSymptôme 4',
               style: TextStyle(
@@ -180,7 +173,7 @@ class Page1 extends StatelessWidget {
           ),
           Pinned.fromPins(
             Pin(size: 12.0, start: 23.0),
-            Pin(size: 12.0, middle: 0.7826),
+            Pin(size: 12.0, middle: 0.7726),
             child: Container(
               decoration: const BoxDecoration(
                 color: Color(0xff54cbc4),

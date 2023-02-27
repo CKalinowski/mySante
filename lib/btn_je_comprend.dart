@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class BTNJeComprend extends StatelessWidget {
-  BTNJeComprend({
-    Key? key,
-  }) : super(key: key);
+  const BTNJeComprend({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -14,17 +13,17 @@ class BTNJeComprend extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0),
           ),
         ),
-        Align(
+        const Align(
           alignment: Alignment(-0.101, 0.29),
           child: SizedBox(
             width: 200.0,
-            height: 25.0,
+            height: 35.0,
             child: Text(
               'Je comprends',
               style: TextStyle(
                 fontFamily: 'Segoe UI',
                 fontSize: 25,
-                color: const Color(0xffffffff),
+                color: Color(0xffffffff),
                 fontWeight: FontWeight.w700,
               ),
               textAlign: TextAlign.center,
