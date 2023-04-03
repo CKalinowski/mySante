@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "205901032137",
+    "project_id": "my-sante-c6f2r8",
+    "storage_bucket": "my-sante-c6f2r8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205901032137:android:1e5a4e3ef986ca60cbbb18",
+        "android_client_info": {
+          "package_name": "com.example.chloe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205901032137-1ff037kvi2kh2e3rqlabdl4vkj1729iq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdRjsw-X3ZYmM2yOZXA_WZtgcj2b051ME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "205901032137-1ff037kvi2kh2e3rqlabdl4vkj1729iq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
