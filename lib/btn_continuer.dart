@@ -1,15 +1,15 @@
-import 'package:chloe/profil.dart';
+import 'package:chloe/page_symptomes.dart';
 import 'package:flutter/material.dart';
 
-class BTNJeComprend extends StatelessWidget {
-  const BTNJeComprend({super.key});
+class BTNContinuer extends StatelessWidget {
+  const BTNContinuer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Profil()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const Symptomes()));
       },
       child: Stack(
         children: <Widget>[
@@ -25,7 +25,7 @@ class BTNJeComprend extends StatelessWidget {
               width: 200.0,
               height: 35.0,
               child: Text(
-                'Je comprends',
+                'Continuer',
                 style: TextStyle(
                   fontFamily: 'Segoe UI',
                   fontSize: 25,

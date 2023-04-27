@@ -40,6 +40,7 @@ dependencies:
   google_fonts: ^4.0.3
   firebase_core: ^2.9.0
   font_awesome_flutter: ^10.4.0
+  sleek_circular_slider : ^2.0.1
 
 dev_dependencies:
   flutter_test:
