@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'header.dart';
 import 'symptom_selector.dart';
 
 class Symptomes extends StatefulWidget {
@@ -21,6 +22,10 @@ class _SymptomesState extends State<Symptomes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const Header(
+        backButton: true,
+        title: 'Symptômes',
+      ),
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SizedBox(
           height: MediaQuery.of(context).size.height,
@@ -28,7 +33,7 @@ class _SymptomesState extends State<Symptomes> {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 150),
+                margin: EdgeInsets.only(top: 20),
                 child: Text(
                   'Quels sont vos symptômes ?',
                   style: GoogleFonts.lato(

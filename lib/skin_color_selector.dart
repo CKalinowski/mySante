@@ -18,7 +18,6 @@ class _SkinColorSelectorState extends State<SkinColorSelector> {
       value: selectedColor,
       padding: EdgeInsets.only(top: 10, bottom: 10, right: 20),
       decoration: InputDecoration(
-        labelText: 'Couleur de peau',
         border: OutlineInputBorder(),
       ),
       items: <String>[

@@ -1,14 +1,11 @@
-import 'package:adobe_xd/page_link.dart';
-import 'package:adobe_xd/pinned.dart';
 import 'package:chloe/btn_continuer.dart';
 import 'package:chloe/header.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'age_selector.dart';
 import 'skin_color_selector.dart';
 import 'gender_selector.dart';
+import 'header.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});
@@ -31,6 +28,10 @@ class _ProfilState extends State<Profil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const Header(
+        backButton: true,
+        title: 'Profil',
+      ),
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SizedBox(
           height: MediaQuery.of(context).size.height,
@@ -38,7 +39,7 @@ class _ProfilState extends State<Profil> {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 150),
+                margin: EdgeInsets.only(top: 20),
                 child: Text(
                   'Votre profil',
                   style: GoogleFonts.lato(
@@ -85,7 +86,7 @@ class _ProfilState extends State<Profil> {
                           },
                         ),
                         Text(
-                          'Couleur de peau :',
+                          'Ethnie :',
                           style: GoogleFonts.lato(
                             fontSize: 25,
                             color: const Color(0xff707070),
