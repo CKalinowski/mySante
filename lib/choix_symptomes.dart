@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
+import 'package:flutter/material.dart';
 
 class ChoixSymptomes extends StatelessWidget {
-  ChoixSymptomes({
+  const ChoixSymptomes({
     Key? key,
   }) : super(key: key);
   @override
@@ -23,12 +23,12 @@ class ChoixSymptomes extends StatelessWidget {
         Pinned.fromPins(
           Pin(size: 195.0, start: 6.0),
           Pin(size: 23.0, start: 7.0),
-          child: Text(
+          child: const Text(
             'Choisir un symptôme ...',
             style: TextStyle(
               fontFamily: 'Lato',
               fontSize: 19,
-              color: const Color(0xff707070),
+              color: Color(0xff707070),
               fontWeight: FontWeight.w500,
             ),
             softWrap: false,
@@ -39,12 +39,12 @@ class ChoixSymptomes extends StatelessWidget {
             color: Colors.transparent,
             border: Border.all(width: 1.0, color: Colors.transparent),
           ),
-          margin: EdgeInsets.fromLTRB(0.0, 39.0, 0.0, 0.0),
+          margin: const EdgeInsets.fromLTRB(0.0, 39.0, 0.0, 0.0),
         ),
         Pinned.fromPins(
           Pin(size: 103.0, start: 6.0),
           Pin(size: 23.0, middle: 0.3378),
-          child: Text(
+          child: const Text(
             'symptôme 1',
             style: TextStyle(
               fontFamily: 'Lato',
@@ -58,7 +58,7 @@ class ChoixSymptomes extends StatelessWidget {
         Pinned.fromPins(
           Pin(size: 103.0, start: 6.0),
           Pin(size: 23.0, middle: 0.6284),
-          child: Text(
+          child: const Text(
             'symptôme 2',
             style: TextStyle(
               fontFamily: 'Lato',
@@ -72,7 +72,7 @@ class ChoixSymptomes extends StatelessWidget {
         Pinned.fromPins(
           Pin(size: 103.0, start: 6.0),
           Pin(size: 23.0, end: 12.0),
-          child: Text(
+          child: const Text(
             'symptôme 3',
             style: TextStyle(
               fontFamily: 'Lato',

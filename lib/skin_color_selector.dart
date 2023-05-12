@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 class SkinColorSelector extends StatefulWidget {
+  const SkinColorSelector({super.key, required this.onSelectColor});
   final Function(String) onSelectColor;
 
-  SkinColorSelector({required this.onSelectColor});
-
   @override
-  _SkinColorSelectorState createState() => _SkinColorSelectorState();
+  State<SkinColorSelector> createState() => _SkinColorSelectorState();
 }
 
 class _SkinColorSelectorState extends State<SkinColorSelector> {
@@ -16,8 +15,8 @@ class _SkinColorSelectorState extends State<SkinColorSelector> {
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       value: selectedColor,
-      padding: EdgeInsets.only(top: 10, bottom: 10, right: 20),
-      decoration: InputDecoration(
+      padding: const EdgeInsets.only(top: 10, bottom: 10, right: 20),
+      decoration: const InputDecoration(
         border: OutlineInputBorder(),
       ),
       items: <String>[

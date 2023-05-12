@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'header.dart';
 import 'symptom_selector.dart';
 
@@ -26,14 +27,14 @@ class _SymptomesState extends State<Symptomes> {
         backButton: true,
         title: 'Symptômes',
       ),
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 20),
+                margin: const EdgeInsets.only(top: 20),
                 child: Text(
                   'Quels sont vos symptômes ?',
                   style: GoogleFonts.lato(
@@ -47,18 +48,18 @@ class _SymptomesState extends State<Symptomes> {
               Container(
                   width: 350,
                   height: 550,
-                  margin: EdgeInsets.only(top: 20),
-                  padding: EdgeInsets.only(left: 20, top: 20),
+                  margin: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
                   decoration: BoxDecoration(
                     color: const Color(0xffffffff),
                     borderRadius: BorderRadius.circular(20.0),
-                    border: Border.all(color: Color(0xff16679a)),
+                    border: Border.all(color: const Color(0xff16679a)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3),
+                        offset: const Offset(0, 3),
                       ),
                     ],
                   ),
@@ -69,7 +70,7 @@ class _SymptomesState extends State<Symptomes> {
                       SymptomSelector(
                         onSelected: _handleSymptomSelected,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
                         'Symptômes sélectionnés :',
                         style: GoogleFonts.lato(
@@ -78,7 +79,7 @@ class _SymptomesState extends State<Symptomes> {
                         ),
                         textAlign: TextAlign.left,
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Expanded(
                         child: ListView.builder(
                           itemCount: _selectedSymptoms.length,
@@ -91,12 +92,12 @@ class _SymptomesState extends State<Symptomes> {
                                   Container(
                                     width: 10,
                                     height: 10,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Colors.blue,
                                       shape: BoxShape.circle,
                                     ),
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   Expanded(
                                     child: Row(
                                       mainAxisAlignment:
@@ -105,7 +106,7 @@ class _SymptomesState extends State<Symptomes> {
                                         Expanded(
                                           child: RichText(
                                             text: TextSpan(
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.normal,
@@ -141,7 +142,7 @@ class _SymptomesState extends State<Symptomes> {
                                               _selectedSymptoms.removeAt(index);
                                             });
                                           },
-                                          child: Icon(Icons.close,
+                                          child: const Icon(Icons.close,
                                               color: Colors.red),
                                         ),
                                       ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Doctolib extends StatelessWidget {
-  Doctolib({
+  const Doctolib({
     Key? key,
   }) : super(key: key);
   @override
@@ -14,7 +14,7 @@ class Doctolib extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.0),
           ),
         ),
-        Align(
+        const Align(
           alignment: Alignment(0.0, 0.226),
           child: SizedBox(
             width: 130.0,
@@ -24,7 +24,7 @@ class Doctolib extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Segoe UI',
                 fontSize: 25,
-                color: const Color(0xff048dd6),
+                color: Color(0xff048dd6),
                 fontWeight: FontWeight.w700,
               ),
               textAlign: TextAlign.center,

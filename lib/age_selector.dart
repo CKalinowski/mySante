@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class AgeSelector extends StatefulWidget {
+  const AgeSelector({super.key, required this.onSelectAge});
   final Function(int) onSelectAge;
 
-  AgeSelector({required this.onSelectAge});
-
   @override
-  _AgeSelectorState createState() => _AgeSelectorState();
+  State<AgeSelector> createState() => _AgeSelectorState();
 }
 
 class _AgeSelectorState extends State<AgeSelector> {
@@ -31,19 +30,22 @@ class _AgeSelectorState extends State<AgeSelector> {
             return Center(
               child: Text(
                 '$selectedAge ans',
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
               ),
             );
           },
           appearance: CircularSliderAppearance(
             customColors: CustomSliderColors(
-              progressBarColors: [Color(0xff16679a), Color(0xff16679a)],
-              trackColor: Color(0xff16679a).withOpacity(0.2),
+              progressBarColors: [
+                const Color(0xff16679a),
+                const Color(0xff16679a)
+              ],
+              trackColor: const Color(0xff16679a).withOpacity(0.2),
             ),
             customWidths: CustomSliderWidths(progressBarWidth: 10),
             infoProperties: InfoProperties(
               topLabelText: 'Âge',
-              topLabelStyle: TextStyle(fontSize: 16),
+              topLabelStyle: const TextStyle(fontSize: 16),
               modifier: (double value) {
                 return '${value.toInt()} ans';
               },

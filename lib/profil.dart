@@ -1,11 +1,11 @@
-import 'package:chloe/btn_continuer.dart';
-import 'package:chloe/header.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'age_selector.dart';
-import 'skin_color_selector.dart';
+import 'btn_continuer.dart';
 import 'gender_selector.dart';
 import 'header.dart';
+import 'skin_color_selector.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});
@@ -32,14 +32,14 @@ class _ProfilState extends State<Profil> {
         backButton: true,
         title: 'Profil',
       ),
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.only(top: 20),
+                margin: const EdgeInsets.only(top: 20),
                 child: Text(
                   'Votre profil',
                   style: GoogleFonts.lato(
@@ -53,18 +53,18 @@ class _ProfilState extends State<Profil> {
               Container(
                   width: 350,
                   height: 550,
-                  margin: EdgeInsets.only(top: 20),
-                  padding: EdgeInsets.only(left: 20, top: 20),
+                  margin: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(left: 20, top: 20),
                   decoration: BoxDecoration(
                     color: const Color(0xffffffff),
                     borderRadius: BorderRadius.circular(20.0),
-                    border: Border.all(color: Color(0xff16679a)),
+                    border: Border.all(color: const Color(0xff16679a)),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3),
+                        offset: const Offset(0, 3),
                       ),
                     ],
                   ),

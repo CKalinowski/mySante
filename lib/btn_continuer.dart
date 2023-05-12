@@ -1,5 +1,6 @@
-import 'package:chloe/page_symptomes.dart';
 import 'package:flutter/material.dart';
+
+import 'page_symptomes.dart';
 
 class BTNContinuer extends StatelessWidget {
   const BTNContinuer({super.key});

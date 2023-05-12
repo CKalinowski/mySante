@@ -1,5 +1,6 @@
-import 'package:chloe/profil.dart';
 import 'package:flutter/material.dart';
+
+import 'profil.dart';
 
 class BTNJeComprend extends StatelessWidget {
   const BTNJeComprend({super.key});

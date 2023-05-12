@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 class GenderSelector extends StatefulWidget {
+  const GenderSelector({Key? key, this.onSelected}) : super(key: key);
   final void Function(String)? onSelected;
 
-  const GenderSelector({Key? key, this.onSelected}) : super(key: key);
-
   @override
-  _GenderSelectorState createState() => _GenderSelectorState();
+  State<GenderSelector> createState() => _GenderSelectorState();
 }
 
 class _GenderSelectorState extends State<GenderSelector> {
@@ -35,7 +34,7 @@ class _GenderSelectorState extends State<GenderSelector> {
                   : Colors.grey[300],
               borderRadius: BorderRadius.circular(50),
             ),
-            child: Icon(Icons.male, size: 40),
+            child: const Icon(Icons.male, size: 40),
           ),
         ),
         GestureDetector(
@@ -49,7 +48,7 @@ class _GenderSelectorState extends State<GenderSelector> {
                   : Colors.grey[300],
               borderRadius: BorderRadius.circular(50),
             ),
-            child: Icon(Icons.female, size: 40),
+            child: const Icon(Icons.female, size: 40),
           ),
         ),
       ],
