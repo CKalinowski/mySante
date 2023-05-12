@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'age_selector.dart';
 import 'btn_continuer.dart';
 import 'gender_selector.dart';
 import 'header.dart';
-import 'skin_color_selector.dart';
+import 'selector_age.dart';
+import 'selector_skin_color.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});

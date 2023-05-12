@@ -4,15 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class SymptomSelector extends StatefulWidget {
-  const SymptomSelector({Key? key, this.onSelected}) : super(key: key);
+  const SymptomSelector(
+      {Key? key, this.onSelected, required this.symptomSelected})
+      : super(key: key);
   final void Function(String symptom, int value)? onSelected;
 
+  final List<String> symptomSelected;
   @override
   State<SymptomSelector> createState() => _SymptomSelectorState();
 }
 
 class _SymptomSelectorState extends State<SymptomSelector> {
-  String _selectedSymptom = '';
+  String? _selectedSymptom;
   int _selectedValue = 1;
 
   final List<String> _symptoms = [
@@ -29,7 +32,6 @@ class _SymptomSelectorState extends State<SymptomSelector> {
     'Diarrhée',
   ];
 
-  String? selectedValue;
   final TextEditingController textEditingController = TextEditingController();
 
   @override
@@ -75,20 +77,22 @@ class _SymptomSelectorState extends State<SymptomSelector> {
                 ),
               ),
               items: _symptoms
-                  .map((item) => DropdownMenuItem(
-                        value: item,
+                  .where((element) => !widget.symptomSelected.contains(element))
+                  .map((symptom) => DropdownMenuItem(
+                        value: symptom,
                         child: Text(
-                          item,
+                          symptom,
                           style: const TextStyle(
                             fontSize: 14,
                           ),
                         ),
                       ))
                   .toList(),
-              value: selectedValue,
+              value: _selectedSymptom,
               onChanged: (value) {
+                print(value);
                 setState(() {
-                  selectedValue = value as String;
+                  _selectedSymptom = value.toString();
                 });
               },
               buttonStyleData: const ButtonStyleData(
@@ -197,9 +201,9 @@ class _SymptomSelectorState extends State<SymptomSelector> {
             backgroundColor: const Color(0xff16679a),
           ),
           onPressed: () {
-            if (_selectedSymptom.isNotEmpty) {
-              widget.onSelected?.call(_selectedSymptom, _selectedValue);
-              _selectedSymptom = '';
+            if (_selectedSymptom!.isNotEmpty) {
+              widget.onSelected?.call(_selectedSymptom!, _selectedValue);
+              _selectedSymptom = null;
               _selectedValue = 1;
             }
           },

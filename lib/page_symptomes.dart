@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'header.dart';
-import 'symptom_selector.dart';
+import 'selector_symptom.dart';
 
 class Symptomes extends StatefulWidget {
   const Symptomes({super.key});
@@ -69,6 +69,9 @@ class _SymptomesState extends State<Symptomes> {
                     children: [
                       SymptomSelector(
                         onSelected: _handleSymptomSelected,
+                        symptomSelected: _selectedSymptoms
+                            .map((e) => e['symptom'] as String)
+                            .toList(),
                       ),
                       const SizedBox(height: 20),
                       Text(
