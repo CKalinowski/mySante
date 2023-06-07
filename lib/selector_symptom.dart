@@ -3,34 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
+import 'api.dart';
+import 'model/symptom.dart';
+
 class SymptomSelector extends StatefulWidget {
   const SymptomSelector(
       {Key? key, this.onSelected, required this.symptomSelected})
       : super(key: key);
-  final void Function(String symptom, int value)? onSelected;
+  final void Function(Symptom symptom, int value)? onSelected;
 
-  final List<String> symptomSelected;
+  final List<Symptom> symptomSelected;
   @override
   State<SymptomSelector> createState() => _SymptomSelectorState();
 }
 
 class _SymptomSelectorState extends State<SymptomSelector> {
-  String? _selectedSymptom;
+  Symptom? _selectedSymptom;
   int _selectedValue = 1;
-
-  final List<String> _symptoms = [
-    'Fièvre',
-    'Toux',
-    'Essoufflement',
-    'Fatigue',
-    'Douleurs musculaires',
-    'Mal de tête',
-    'Perte de goût ou d\'odorat',
-    'Maux de gorge',
-    'Nez bouché ou qui coule',
-    'Nausées ou vomissements',
-    'Diarrhée',
-  ];
 
   final TextEditingController textEditingController = TextEditingController();
 
@@ -61,89 +50,104 @@ class _SymptomSelectorState extends State<SymptomSelector> {
               color: Theme.of(context).hintColor,
             ),
           ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton2<String>(
-              dropdownStyleData: DropdownStyleData(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              isExpanded: true,
-              hint: Text(
-                'Rechercher ...',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context).hintColor,
-                ),
-              ),
-              items: _symptoms
-                  .where((element) => !widget.symptomSelected.contains(element))
-                  .map((symptom) => DropdownMenuItem(
-                        value: symptom,
-                        child: Text(
-                          symptom,
-                          style: const TextStyle(
-                            fontSize: 14,
+          child: FutureBuilder(
+            future: Api.getSymptoms(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final List<Symptom> symptoms = snapshot.data as List<Symptom>;
+                return DropdownButtonHideUnderline(
+                  child: DropdownButton2<int?>(
+                      dropdownStyleData: DropdownStyleData(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      isExpanded: true,
+                      hint: Text(
+                        'Rechercher ...',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(context).hintColor,
+                        ),
+                      ),
+                      items: symptoms
+                          .where((element) =>
+                              !widget.symptomSelected.contains(element))
+                          .map((symptom) => DropdownMenuItem(
+                                value: symptom.id,
+                                child: Text(
+                                  symptom.nomFr,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      value: _selectedSymptom?.id,
+                      onChanged: (value) {
+                        print(value);
+                        setState(() {
+                          _selectedSymptom = symptoms
+                              .firstWhere((element) => element.id == value);
+                        });
+                      },
+                      buttonStyleData: const ButtonStyleData(
+                        height: 40,
+                        width: 200,
+                      ),
+                      menuItemStyleData: const MenuItemStyleData(
+                        height: 40,
+                      ),
+                      dropdownSearchData: DropdownSearchData(
+                        searchController: textEditingController,
+                        searchInnerWidgetHeight: 50,
+                        searchInnerWidget: Container(
+                          height: 50,
+                          padding: const EdgeInsets.only(
+                            top: 8,
+                            bottom: 4,
+                            right: 8,
+                            left: 8,
+                          ),
+                          child: TextFormField(
+                            expands: true,
+                            maxLines: null,
+                            controller: textEditingController,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 8,
+                              ),
+                              hintText: 'Votre symptôme ...',
+                              hintStyle: const TextStyle(fontSize: 12),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
                           ),
                         ),
-                      ))
-                  .toList(),
-              value: _selectedSymptom,
-              onChanged: (value) {
-                print(value);
-                setState(() {
-                  _selectedSymptom = value.toString();
-                });
-              },
-              buttonStyleData: const ButtonStyleData(
-                height: 40,
-                width: 200,
-              ),
-              menuItemStyleData: const MenuItemStyleData(
-                height: 40,
-              ),
-              dropdownSearchData: DropdownSearchData(
-                searchController: textEditingController,
-                searchInnerWidgetHeight: 50,
-                searchInnerWidget: Container(
-                  height: 50,
-                  padding: const EdgeInsets.only(
-                    top: 8,
-                    bottom: 4,
-                    right: 8,
-                    left: 8,
-                  ),
-                  child: TextFormField(
-                    expands: true,
-                    maxLines: null,
-                    controller: textEditingController,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 8,
+                        searchMatchFn: (item, searchValue) {
+                          return (symptoms.firstWhere(
+                                  (element) => element.id == item.value))
+                              .nomFr
+                              .toLowerCase()
+                              .contains(searchValue.toLowerCase());
+                        },
                       ),
-                      hintText: 'Votre symptôme ...',
-                      hintStyle: const TextStyle(fontSize: 12),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  ),
-                ),
-                searchMatchFn: (item, searchValue) {
-                  return (item.value!
-                      .toLowerCase()
-                      .contains(searchValue.toLowerCase()));
-                },
-              ),
-              //This to clear the search value when you close the menu
-              onMenuStateChange: (isOpen) {
-                if (!isOpen) {
-                  textEditingController.clear();
-                }
-              },
-            ),
+                      //This to clear the search value when you close the menu
+                      onMenuStateChange: (isOpen) {
+                        if (!isOpen) {
+                          textEditingController.clear();
+                        }
+                      }),
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
           ),
         ),
         const SizedBox(height: 10),
@@ -201,7 +205,7 @@ class _SymptomSelectorState extends State<SymptomSelector> {
             backgroundColor: const Color(0xff16679a),
           ),
           onPressed: () {
-            if (_selectedSymptom!.isNotEmpty) {
+            if (_selectedSymptom != null) {
               widget.onSelected?.call(_selectedSymptom!, _selectedValue);
               _selectedSymptom = null;
               _selectedValue = 1;

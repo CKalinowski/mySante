@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'btn_recommencer.dart';
+import 'doctolib.dart';
 import 'expendable_button.dart';
 import 'header.dart';
 
@@ -71,16 +72,7 @@ class MaladieDetail extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Ajoutez ici la logique pour ouvrir le lien Doctolib
-                      },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: const Color(0xff048DD6),
-                      ),
-                      child: const Text('Doctolib'),
-                    ),
+                    const Doctolib(),
                     const SizedBox(height: 20.0),
                     Container(
                       width: 289.0,

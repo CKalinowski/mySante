@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'btn_valider.dart';
 import 'header.dart';
+import 'model/symptom.dart';
 import 'selector_symptom.dart';
 
 class Symptomes extends StatefulWidget {
@@ -15,7 +16,7 @@ class Symptomes extends StatefulWidget {
 class _SymptomesState extends State<Symptomes> {
   final List<Map<String, dynamic>> _selectedSymptoms = [];
 
-  void _handleSymptomSelected(String symptom, int value) {
+  void _handleSymptomSelected(Symptom symptom, int value) {
     setState(() {
       _selectedSymptoms.add({'symptom': symptom, 'value': value});
     });
@@ -71,7 +72,7 @@ class _SymptomesState extends State<Symptomes> {
                       SymptomSelector(
                         onSelected: _handleSymptomSelected,
                         symptomSelected: _selectedSymptoms
-                            .map((e) => e['symptom'] as String)
+                            .map((e) => e['symptom'] as Symptom)
                             .toList(),
                       ),
                       const SizedBox(height: 20),
@@ -118,7 +119,8 @@ class _SymptomesState extends State<Symptomes> {
                                               children: [
                                                 TextSpan(
                                                   text: _selectedSymptoms[index]
-                                                      ['symptom'],
+                                                          ['symptom']
+                                                      .nomFr,
                                                   style: GoogleFonts.lato(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w700,

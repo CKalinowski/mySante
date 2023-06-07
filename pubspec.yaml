@@ -17,7 +17,9 @@ dependencies:
   flutter_svg: ^1.1.6  
   font_awesome_flutter: ^10.4.0
   google_fonts: ^4.0.3
+  http: ^0.13.6
   sleek_circular_slider : ^2.0.1
+  url_launcher: ^6.1.11
   
 
 dev_dependencies:
