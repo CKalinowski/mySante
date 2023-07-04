@@ -4,10 +4,10 @@ class ExpandableButton extends StatefulWidget {
   const ExpandableButton({
     Key? key,
     required this.buttonName,
-    required this.categoryId,
+    required this.label,
   }) : super(key: key);
   final String buttonName;
-  final String categoryId;
+  final String label;
 
   @override
   _ExpandableButtonState createState() => _ExpandableButtonState();
@@ -53,10 +53,8 @@ class _ExpandableButtonState extends State<ExpandableButton> {
           color: Color(_isExpanded ? 0xff54cbc4 : 0xff000000),
           _isExpanded ? Icons.arrow_drop_down_circle : Icons.arrow_drop_down,
         ),
-        children: const <Widget>[
-          ListTile(
-              title: Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.')),
+        children: <Widget>[
+          ListTile(title: Text(widget.label)),
         ],
         onExpansionChanged: (bool expanded) {
           setState(() {

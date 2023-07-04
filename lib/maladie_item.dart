@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'maladie_detail.dart';
+import 'model/disease.dart';
 
 class MaladieItem extends StatelessWidget {
   const MaladieItem({
     Key? key,
     required this.maladie,
     required this.id,
+    required this.diseases,
   }) : super(key: key);
 
   final String maladie;
   final String id;
+  final Disease diseases;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class MaladieItem extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MaladieDetail(id: id),
+                  builder: (context) => MaladieDetail(disease: diseases),
                 ),
               );
             },

@@ -171,7 +171,12 @@ class _SymptomesState extends State<Symptomes> {
                         width: 289.0,
                         height: 56.0,
                         margin: const EdgeInsets.only(left: 10, bottom: 10),
-                        child: const BTNValider(),
+                        child: BTNValider(
+                          widget.selectedColor,
+                          widget.selectedGender,
+                          widget.selectedAge,
+                          _selectedSymptoms,
+                        ),
                       ),
                     ],
                   )),

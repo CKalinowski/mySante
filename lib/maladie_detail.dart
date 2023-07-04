@@ -5,13 +5,23 @@ import 'btn_recommencer.dart';
 import 'doctolib.dart';
 import 'expendable_button.dart';
 import 'header.dart';
+import 'model/disease.dart';
 
 class MaladieDetail extends StatelessWidget {
-  const MaladieDetail({Key? key, required this.id}) : super(key: key);
-  final String id;
+  const MaladieDetail({Key? key, required this.disease}) : super(key: key);
+  final Disease disease;
 
   @override
   Widget build(BuildContext context) {
+    String proceduresText = '';
+    if (disease.testsProceduresList != null) {
+      proceduresText = disease.testsProceduresList!
+          .map((testProcedure) =>
+              testProcedure.nomFr ?? 'Procédure non disponible')
+          .join('\n');
+    } else {
+      proceduresText = 'Aucune procédure de test disponible.';
+    }
     return Scaffold(
       appBar: const Header(
         backButton: true,
@@ -26,7 +36,7 @@ class MaladieDetail extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 20),
               child: Text(
-                'Détails de la maladie 1', // Remplacez par le nom de la maladie
+                disease.name?.nomFr ?? 'Maladie',
                 style: GoogleFonts.lato(
                   fontSize: 25,
                   color: const Color(0xff707070),
@@ -44,24 +54,23 @@ class MaladieDetail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet risus porttitor arcu dictum, in vehicula odio consectetur. Nulla dignissim congue faucibus. Pellentesque ultrices in massa sed egestas. Morbi sodales, neque vel auctor eleifend, enim risus elementum libero, quis elementum nulla lacus eget metus.',
+                      disease.description?.nomFr ?? 'Maladie',
                       style: GoogleFonts.lato(fontSize: 15.0),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 20.0),
-                    const ExpandableButton(
-                      buttonName: 'Dépistage',
-                      categoryId: '1',
-                    ),
+                    ExpandableButton(
+                        buttonName: 'Dépistage', label: proceduresText),
                     const SizedBox(height: 15.0),
-                    const ExpandableButton(
-                      buttonName: 'Médicaments',
-                      categoryId: '2',
-                    ),
+                    ExpandableButton(
+                        buttonName: 'Médicaments',
+                        label: disease.medicationDescription?.descriptionFr ??
+                            'Médicaments non trouvés'),
                     const SizedBox(height: 15.0),
-                    const ExpandableButton(
+                    ExpandableButton(
                       buttonName: 'Personnes à risque',
-                      categoryId: '3',
+                      label: disease.whois?.descFr ??
+                          'Personnes à risque non disponible',
                     ),
                     const SizedBox(height: 15.0),
                     Text(

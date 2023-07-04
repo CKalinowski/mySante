@@ -3,14 +3,27 @@ import 'package:flutter/material.dart';
 import 'page_resultats.dart';
 
 class BTNValider extends StatelessWidget {
-  const BTNValider({super.key});
+  const BTNValider(this.selectedColor, this.selectedGender, this.selectedAge,
+      this.selectedSymptoms,
+      {super.key});
+  final String selectedColor;
+  final String selectedGender;
+  final int selectedAge;
+  final List<Map<String, dynamic>> selectedSymptoms;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const Resultats()));
+      onTap: () async {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Resultats(
+                      'white',
+                      selectedGender,
+                      selectedAge,
+                      selectedSymptoms,
+                    )));
       },
       child: Stack(
         children: <Widget>[

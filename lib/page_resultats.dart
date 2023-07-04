@@ -1,22 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'api.dart';
 import 'header.dart';
 import 'maladie_item.dart';
+import 'model/disease.dart';
 
 class Resultats extends StatefulWidget {
-  const Resultats({super.key});
+  const Resultats(
+    this.selectedColor,
+    this.selectedGender,
+    this.selectedAge,
+    this.selectedSymptoms, {
+    Key? key,
+  }) : super(key: key);
+
+  final String selectedColor;
+  final String selectedGender;
+  final int selectedAge;
+  final List<Map<String, dynamic>> selectedSymptoms;
 
   @override
   State<Resultats> createState() => _ResultatsState();
 }
 
 class _ResultatsState extends State<Resultats> {
+  late Future<List<Disease>> futureDiseases;
+
   final List<Map<String, dynamic>> _maladies = [
     {'maladie': 'Maladie 1', 'id': '1'},
     {'maladie': 'Maladie 2', 'id': '2'},
     // Ajoutez plus de maladies ici si nécessaire
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    var api = Api(); // Initialisez l'instance d'Api ici
+    String sexe = widget.selectedGender;
+    futureDiseases = Api.getDiseases(
+      // Utilisez l'instance d'Api pour appeler getDiseases
+      age: widget.selectedAge,
+      sex: sexe,
+      ethnicity: widget.selectedColor,
+      symptomsAndVelocity: widget.selectedSymptoms,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,15 +104,43 @@ class _ResultatsState extends State<Resultats> {
                   ),
                   const SizedBox(height: 20),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: _maladies.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final maladie = _maladies[index]['maladie'] as String;
-                        final id = _maladies[index]['id'] as String;
-                        return MaladieItem(
-                          maladie: maladie,
-                          id: id,
-                        );
+                    child: FutureBuilder<List<Disease>>(
+                      future: futureDiseases,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<List<Disease>> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text(
+                              'Une erreur s\'est produite : ${snapshot.error}',
+                            ),
+                          );
+                        } else if (snapshot.hasData) {
+                          final diseases = snapshot.data!;
+                          return ListView.builder(
+                            itemCount: diseases.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final disease = diseases[index];
+                              final diseaseNameFr =
+                                  disease.name?.nomFr ?? 'Nom inconnu';
+                              final diseaseNameEn =
+                                  disease.name?.nomEn ?? 'Unknown Name';
+                              return MaladieItem(
+                                maladie: diseaseNameFr,
+                                id: disease.id.toString(),
+                                diseases: disease,
+                              );
+                            },
+                          );
+                        } else {
+                          return const Center(
+                            child: Text('Aucun résultat trouvé.'),
+                          );
+                        }
                       },
                     ),
                   ),
