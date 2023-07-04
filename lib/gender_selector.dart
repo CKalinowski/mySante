@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class GenderSelector extends StatefulWidget {
-  const GenderSelector({Key? key, this.onSelected}) : super(key: key);
-  final void Function(String)? onSelected;
+  const GenderSelector({Key? key, this.onSelectedGender}) : super(key: key);
+  final void Function(String)? onSelectedGender;
 
   @override
   State<GenderSelector> createState() => _GenderSelectorState();
@@ -15,7 +15,7 @@ class _GenderSelectorState extends State<GenderSelector> {
     setState(() {
       _selectedGender = gender;
     });
-    widget.onSelected?.call(_selectedGender);
+    widget.onSelectedGender?.call(_selectedGender);
   }
 
   @override

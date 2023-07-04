@@ -3,14 +3,24 @@ import 'package:flutter/material.dart';
 import 'page_symptomes.dart';
 
 class BTNContinuer extends StatelessWidget {
-  const BTNContinuer({super.key});
+  const BTNContinuer(this.selectedColor, this.selectedGender, this.selectedAge,
+      {super.key});
+  final String selectedColor;
+  final String selectedGender;
+  final int selectedAge;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const Symptomes()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Symptomes(
+                      selectedColor,
+                      selectedGender,
+                      selectedAge,
+                    )));
       },
       child: Stack(
         children: <Widget>[

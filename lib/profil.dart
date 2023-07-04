@@ -15,15 +15,9 @@ class Profil extends StatefulWidget {
 }
 
 class _ProfilState extends State<Profil> {
+  String selectedColor = 'Caucasien'; // La couleur par défaut est caucasien
+  String selectedGender = 'male'; // Le sexe par défaut est homme
   int selectedAge = 30; // L'âge par défaut est 30 ans
-
-  void onSelectAge(int age) {
-    // Mettre à jour la valeur de l'âge sélectionné
-    setState(() {
-      selectedAge = age;
-    });
-    // Vous pouvez faire d'autres choses avec la valeur de l'âge ici
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +75,10 @@ class _ProfilState extends State<Profil> {
                           textAlign: TextAlign.center,
                         ),
                         GenderSelector(
-                          onSelected: (gender) {
+                          onSelectedGender: (gender) {
+                            setState(() {
+                              selectedGender = gender;
+                            });
                             print('Sexe sélectionné : $gender');
                           },
                         ),
@@ -94,9 +91,12 @@ class _ProfilState extends State<Profil> {
                           textAlign: TextAlign.center,
                         ),
                         SkinColorSelector(
-                          onSelectColor: (String selectedColor) {
+                          onSelectColor: (String color) {
+                            setState(() {
+                              selectedColor = color;
+                            });
                             // La couleur sélectionnée est transmise ici
-                            print('Couleur sélectionnée : $selectedColor');
+                            print('Couleur sélectionnée : $color');
                           },
                         ),
                         Text(
@@ -110,6 +110,9 @@ class _ProfilState extends State<Profil> {
                         // selecteur age
                         AgeSelector(
                           onSelectAge: (int age) {
+                            setState(() {
+                              selectedAge = age;
+                            });
                             // Faites quelque chose avec la valeur de l'âge sélectionné
                             print('Âge sélectionné : $age');
                           },
@@ -118,7 +121,11 @@ class _ProfilState extends State<Profil> {
                           width: 289.0,
                           height: 56.0,
                           margin: const EdgeInsets.only(left: 10),
-                          child: const BTNContinuer(),
+                          child: BTNContinuer(
+                            selectedColor,
+                            selectedGender,
+                            selectedAge,
+                          ),
                         ),
                       ])),
             ],

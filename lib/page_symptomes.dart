@@ -7,7 +7,11 @@ import 'model/symptom.dart';
 import 'selector_symptom.dart';
 
 class Symptomes extends StatefulWidget {
-  const Symptomes({super.key});
+  const Symptomes(this.selectedColor, this.selectedGender, this.selectedAge,
+      {super.key});
+  final String selectedColor;
+  final String selectedGender;
+  final int selectedAge;
 
   @override
   State<Symptomes> createState() => _SymptomesState();
@@ -24,6 +28,9 @@ class _SymptomesState extends State<Symptomes> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.selectedColor);
+    print(widget.selectedGender);
+    print(widget.selectedAge);
     return Scaffold(
       appBar: const Header(
         backButton: true,
