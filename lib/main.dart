@@ -11,9 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      builder: (context, child) => SafeArea(
+        child: child!,
+      ),
+      debugShowCheckedModeBanner: false,
       title: 'MySante',
-      home: Disclaimer(),
+      home: const Disclaimer(),
     );
   }
 }
