@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'main.dart';
+
 class Header extends StatefulWidget implements PreferredSizeWidget {
   const Header({Key? key, this.backButton = false, required this.title})
       : super(key: key);
@@ -14,8 +16,6 @@ class Header extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _HeaderState extends State<Header> {
-  bool _isEnglish = false;
-
   @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
@@ -44,29 +44,37 @@ class _HeaderState extends State<Header> {
                 )
               : Container(),
           Positioned(
-            top: statusBarHeight,
+            top: 10,
             right: 16,
             child: Row(
               children: [
                 Text(
-                  _isEnglish ? 'EN' : 'FR',
-                  style: const TextStyle(
+                  'FR',
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
+                    fontWeight:
+                        !isEnglish ? FontWeight.w900 : FontWeight.normal,
                   ),
                 ),
-                const SizedBox(width: 8),
                 Switch(
-                  value: _isEnglish,
+                  value: isEnglish,
                   onChanged: (value) {
                     setState(() {
-                      _isEnglish = value;
-                      print(
-                          'Langue sélectionnée : ${_isEnglish ? "EN" : "FR"}');
+                      isEnglish = value;
+                      print('Langue sélectionnée : ${isEnglish ? "EN" : "FR"}');
                       // Ajouter le code de changement de langue ici
                     });
                   },
                   activeColor: Colors.white,
+                ),
+                Text(
+                  'EN',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: isEnglish ? FontWeight.w900 : FontWeight.normal,
+                  ),
                 ),
               ],
             ),

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:translator/translator.dart';
 
 import 'disclaimer.dart';
+
+bool isEnglish = false;
+final translator = GoogleTranslator();
 
 void main() {
   runApp(const MyApp());

@@ -19,6 +19,7 @@ dependencies:
   google_fonts: ^4.0.3
   http: ^0.13.6
   sleek_circular_slider : ^2.0.1
+  translator: ^0.1.7
   url_launcher: ^6.1.11
   
 

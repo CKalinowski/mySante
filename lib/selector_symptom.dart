@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 import 'api.dart';
+import 'main.dart';
 import 'model/symptom.dart';
 
 class SymptomSelector extends StatefulWidget {
@@ -76,7 +77,7 @@ class _SymptomSelectorState extends State<SymptomSelector> {
                           .map((symptom) => DropdownMenuItem(
                                 value: symptom.id,
                                 child: Text(
-                                  symptom.nomFr,
+                                  isEnglish ? symptom.nomEn : symptom.nomFr,
                                   style: const TextStyle(
                                     fontSize: 14,
                                   ),
@@ -128,9 +129,11 @@ class _SymptomSelectorState extends State<SymptomSelector> {
                           ),
                         ),
                         searchMatchFn: (item, searchValue) {
-                          return (symptoms.firstWhere(
-                                  (element) => element.id == item.value))
-                              .nomFr
+                          Symptom symptomLangue = symptoms.firstWhere(
+                              (element) => element.id == item.value);
+                          return (isEnglish
+                                  ? symptomLangue.nomEn
+                                  : symptomLangue.nomFr)
                               .toLowerCase()
                               .contains(searchValue.toLowerCase());
                         },
