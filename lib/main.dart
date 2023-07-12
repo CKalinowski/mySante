@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:translator/translator.dart';
 
 import 'disclaimer.dart';
+import 'model/langue_choose.dart';
 
-bool isEnglish = false;
 final translator = GoogleTranslator();
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => LangueChoose()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

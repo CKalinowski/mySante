@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:translator/translator.dart';
 
 import 'btn_je_comprends.dart';
 import 'main.dart';
+import 'model/langue_choose.dart';
 
 class Disclaimer extends StatefulWidget {
   const Disclaimer({super.key});
@@ -83,7 +85,10 @@ class _DisclaimerState extends State<Disclaimer> {
                             top: 200, left: 30, right: 30),
                         child: FutureBuilder(
                             future: translator.translate(textDisclaimer,
-                                from: 'fr', to: isEnglish ? 'en' : 'fr'),
+                                from: 'fr',
+                                to: context.watch<LangueChoose>().isEnglish
+                                    ? 'en'
+                                    : 'fr'),
                             builder: (_, snap) {
                               if (snap.hasData) {
                                 var translation = snap.data as Translation;
@@ -112,7 +117,7 @@ class _DisclaimerState extends State<Disclaimer> {
                         width: 289.0,
                         height: 56.0,
                         margin: const EdgeInsets.only(top: 370),
-                        child: const BTNJeComprend(),
+                        child: BTNJeComprend(),
                       ),
                     ],
                   ),
@@ -129,19 +134,15 @@ class _DisclaimerState extends State<Disclaimer> {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
-                      fontWeight:
-                          !isEnglish ? FontWeight.w900 : FontWeight.normal,
+                      fontWeight: !context.watch<LangueChoose>().isEnglish
+                          ? FontWeight.w900
+                          : FontWeight.normal,
                     ),
                   ),
                   Switch(
-                    value: isEnglish,
+                    value: context.watch<LangueChoose>().isEnglish,
                     onChanged: (value) {
-                      setState(() {
-                        isEnglish = value;
-                        print(
-                            'Langue sélectionnée : ${isEnglish ? "EN" : "FR"}');
-                        // Ajouter le code de changement de langue ici
-                      });
+                      context.read<LangueChoose>().change();
                     },
                     activeColor: Colors.white,
                   ),
@@ -150,8 +151,9 @@ class _DisclaimerState extends State<Disclaimer> {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
-                      fontWeight:
-                          isEnglish ? FontWeight.w900 : FontWeight.normal,
+                      fontWeight: context.watch<LangueChoose>().isEnglish
+                          ? FontWeight.w900
+                          : FontWeight.normal,
                     ),
                   ),
                 ],

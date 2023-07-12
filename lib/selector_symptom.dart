@@ -1,10 +1,11 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 import 'api.dart';
-import 'main.dart';
+import 'model/langue_choose.dart';
 import 'model/symptom.dart';
 
 class SymptomSelector extends StatefulWidget {
@@ -77,7 +78,9 @@ class _SymptomSelectorState extends State<SymptomSelector> {
                           .map((symptom) => DropdownMenuItem(
                                 value: symptom.id,
                                 child: Text(
-                                  isEnglish ? symptom.nomEn : symptom.nomFr,
+                                  context.watch<LangueChoose>().isEnglish
+                                      ? symptom.nomEn
+                                      : symptom.nomFr,
                                   style: const TextStyle(
                                     fontSize: 14,
                                   ),
@@ -131,7 +134,7 @@ class _SymptomSelectorState extends State<SymptomSelector> {
                         searchMatchFn: (item, searchValue) {
                           Symptom symptomLangue = symptoms.firstWhere(
                               (element) => element.id == item.value);
-                          return (isEnglish
+                          return (context.read<LangueChoose>().isEnglish
                                   ? symptomLangue.nomEn
                                   : symptomLangue.nomFr)
                               .toLowerCase()

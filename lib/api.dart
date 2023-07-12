@@ -6,7 +6,7 @@ import 'model/disease.dart';
 import 'model/symptom.dart';
 
 class Api {
-  static const String _url = "http://192.168.1.44:8080/api";
+  static const String _url = "http://192.168.0.78:8080/api";
 /*  final Map<String, String> _headers = {
     'X-API-KEY':  '3cfa26d6-5c52-480b-90ea-7aee7b40a5d6'
   }; */

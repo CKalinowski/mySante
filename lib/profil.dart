@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'btn_continuer.dart';
 import 'gender_selector.dart';
 import 'header.dart';
+import 'main.dart';
+import 'model/langue_choose.dart';
 import 'selector_age.dart';
 import 'selector_skin_color.dart';
 
@@ -18,6 +21,7 @@ class _ProfilState extends State<Profil> {
   String selectedColor = 'Caucasien'; // La couleur par défaut est caucasien
   String selectedGender = 'male'; // Le sexe par défaut est homme
   int selectedAge = 30; // L'âge par défaut est 30 ans
+  String textProfil = "Votre profil";
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +38,25 @@ class _ProfilState extends State<Profil> {
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 20),
-                child: Text(
-                  'Votre profil',
-                  style: GoogleFonts.lato(
-                    fontSize: 25,
-                    color: const Color(0xff707070),
-                    fontWeight: FontWeight.w700,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
+                child: FutureBuilder(
+                    future: translator.translate(textProfil,
+                        from: 'fr',
+                        to: context.watch<LangueChoose>().isEnglish
+                            ? 'en'
+                            : 'fr'),
+                    builder: (context, snapshot) {
+                      return Text(
+                        snapshot.hasData
+                            ? snapshot.data.toString()
+                            : textProfil,
+                        style: GoogleFonts.lato(
+                          fontSize: 25,
+                          color: const Color(0xff707070),
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.center,
+                      );
+                    }),
               ),
               Container(
                   width: 350,

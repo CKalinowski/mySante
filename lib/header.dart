@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import 'main.dart';
+import 'model/langue_choose.dart';
 
 class Header extends StatefulWidget implements PreferredSizeWidget {
   const Header({Key? key, this.backButton = false, required this.title})
@@ -53,18 +54,15 @@ class _HeaderState extends State<Header> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
-                    fontWeight:
-                        !isEnglish ? FontWeight.w900 : FontWeight.normal,
+                    fontWeight: !context.watch<LangueChoose>().isEnglish
+                        ? FontWeight.w900
+                        : FontWeight.normal,
                   ),
                 ),
                 Switch(
-                  value: isEnglish,
+                  value: context.watch<LangueChoose>().isEnglish,
                   onChanged: (value) {
-                    setState(() {
-                      isEnglish = value;
-                      print('Langue sélectionnée : ${isEnglish ? "EN" : "FR"}');
-                      // Ajouter le code de changement de langue ici
-                    });
+                    context.read<LangueChoose>().change();
                   },
                   activeColor: Colors.white,
                 ),
@@ -73,7 +71,9 @@ class _HeaderState extends State<Header> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
-                    fontWeight: isEnglish ? FontWeight.w900 : FontWeight.normal,
+                    fontWeight: context.watch<LangueChoose>().isEnglish
+                        ? FontWeight.w900
+                        : FontWeight.normal,
                   ),
                 ),
               ],

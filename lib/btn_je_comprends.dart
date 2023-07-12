@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'main.dart';
+import 'model/langue_choose.dart';
 import 'profil.dart';
 
 class BTNJeComprend extends StatelessWidget {
   const BTNJeComprend({super.key});
+  final String textJeComprend = 'Je comprends';
 
   @override
   Widget build(BuildContext context) {
@@ -20,22 +24,32 @@ class BTNJeComprend extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.0),
             ),
           ),
-          const Align(
+          Align(
             alignment: Alignment.center,
             child: SizedBox(
               width: 200.0,
               height: 35.0,
-              child: Text(
-                'Je comprends',
-                style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 25,
-                  color: Color(0xffffffff),
-                  fontWeight: FontWeight.w700,
-                ),
-                textAlign: TextAlign.center,
-                softWrap: false,
-              ),
+              child: FutureBuilder(
+                  future: translator.translate(textJeComprend,
+                      from: 'fr',
+                      to: context.watch<LangueChoose>().isEnglish
+                          ? 'en'
+                          : 'fr'),
+                  builder: (context, snapshot) {
+                    return Text(
+                      snapshot.hasData
+                          ? snapshot.data.toString()
+                          : textJeComprend,
+                      style: const TextStyle(
+                        fontFamily: 'Segoe UI',
+                        fontSize: 25,
+                        color: Color(0xffffffff),
+                        fontWeight: FontWeight.w700,
+                      ),
+                      textAlign: TextAlign.center,
+                      softWrap: false,
+                    );
+                  }),
             ),
           ),
         ],
