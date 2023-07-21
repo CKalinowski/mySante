@@ -22,6 +22,9 @@ class _ProfilState extends State<Profil> {
   String selectedGender = 'male'; // Le sexe par défaut est homme
   int selectedAge = 30; // L'âge par défaut est 30 ans
   String textProfil = "Votre profil";
+  String textGenre = "Genre :";
+  String textEthnie = "Ethnie :";
+  String textAge = "Votre âge :";
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +42,10 @@ class _ProfilState extends State<Profil> {
               Container(
                 margin: const EdgeInsets.only(top: 20),
                 child: FutureBuilder(
-                    future: translator.translate(textProfil,
-                        from: 'fr',
-                        to: context.watch<LangueChoose>().isEnglish
-                            ? 'en'
-                            : 'fr'),
+                    future: translator.translate(textProfil, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
                     builder: (context, snapshot) {
                       return Text(
-                        snapshot.hasData
-                            ? snapshot.data.toString()
-                            : textProfil,
+                        snapshot.hasData ? snapshot.data.toString() : textProfil,
                         style: GoogleFonts.lato(
                           fontSize: 25,
                           color: const Color(0xff707070),
@@ -76,72 +73,81 @@ class _ProfilState extends State<Profil> {
                       ),
                     ],
                   ),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Sexe :',
-                          style: GoogleFonts.lato(
-                            fontSize: 25,
-                            color: const Color(0xff707070),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        GenderSelector(
-                          onSelectedGender: (gender) {
-                            setState(() {
-                              selectedGender = gender;
-                            });
-                            print('Sexe sélectionné : $gender');
-                          },
-                        ),
-                        Text(
-                          'Ethnie :',
-                          style: GoogleFonts.lato(
-                            fontSize: 25,
-                            color: const Color(0xff707070),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        SkinColorSelector(
-                          onSelectColor: (String color) {
-                            setState(() {
-                              selectedColor = color;
-                            });
-                            // La couleur sélectionnée est transmise ici
-                            print('Couleur sélectionnée : $color');
-                          },
-                        ),
-                        Text(
-                          'Votre âge :',
-                          style: GoogleFonts.lato(
-                            fontSize: 25,
-                            color: const Color(0xff707070),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        // selecteur age
-                        AgeSelector(
-                          onSelectAge: (int age) {
-                            setState(() {
-                              selectedAge = age;
-                            });
-                            // Faites quelque chose avec la valeur de l'âge sélectionné
-                            print('Âge sélectionné : $age');
-                          },
-                        ),
-                        Container(
-                          width: 289.0,
-                          height: 56.0,
-                          margin: const EdgeInsets.only(left: 10),
-                          child: BTNContinuer(
-                            selectedColor,
-                            selectedGender,
-                            selectedAge,
-                          ),
-                        ),
-                      ])),
+                  child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    FutureBuilder(
+                        future: translator.translate(textGenre, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                        builder: (context, snapshot) {
+                          return Text(
+                            snapshot.hasData ? snapshot.data.toString() : textProfil,
+                            style: GoogleFonts.lato(
+                              fontSize: 25,
+                              color: const Color(0xff707070),
+                            ),
+                            textAlign: TextAlign.center,
+                          );
+                        }),
+                    GenderSelector(
+                      onSelectedGender: (gender) {
+                        setState(() {
+                          selectedGender = gender;
+                        });
+                        print('Sexe sélectionné : $gender');
+                      },
+                    ),
+                    FutureBuilder(
+                        future: translator.translate(textEthnie, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                        builder: (context, snapshot) {
+                          return Text(
+                            snapshot.hasData ? snapshot.data.toString() : textProfil,
+                            style: GoogleFonts.lato(
+                              fontSize: 25,
+                              color: const Color(0xff707070),
+                            ),
+                            textAlign: TextAlign.center,
+                          );
+                        }),
+                    SkinColorSelector(
+                      onSelectColor: (String color) {
+                        setState(() {
+                          selectedColor = color;
+                        });
+                        // La couleur sélectionnée est transmise ici
+                        print('Couleur sélectionnée : $color');
+                      },
+                    ),
+                    FutureBuilder(
+                        future: translator.translate(textAge, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                        builder: (context, snapshot) {
+                          return Text(
+                            snapshot.hasData ? snapshot.data.toString() : textProfil,
+                            style: GoogleFonts.lato(
+                              fontSize: 25,
+                              color: const Color(0xff707070),
+                            ),
+                            textAlign: TextAlign.center,
+                          );
+                        }),
+                    // selecteur age
+                    AgeSelector(
+                      onSelectAge: (int age) {
+                        setState(() {
+                          selectedAge = age;
+                        });
+                        // Faites quelque chose avec la valeur de l'âge sélectionné
+                        print('Âge sélectionné : $age');
+                      },
+                    ),
+                    Container(
+                      width: 289.0,
+                      height: 56.0,
+                      margin: const EdgeInsets.only(left: 10),
+                      child: BTNContinuer(
+                        selectedColor,
+                        selectedGender,
+                        selectedAge,
+                      ),
+                    ),
+                  ])),
             ],
           )),
     );

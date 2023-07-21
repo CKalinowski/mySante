@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'model/langue_choose.dart';
 
 class SkinColorSelector extends StatefulWidget {
   const SkinColorSelector({super.key, required this.onSelectColor});
@@ -9,25 +12,20 @@ class SkinColorSelector extends StatefulWidget {
 }
 
 class _SkinColorSelectorState extends State<SkinColorSelector> {
-  String selectedColor = 'Caucasien';
+  int selectedColor = 0;
+  late List<String> listEthnicity;
 
   @override
   Widget build(BuildContext context) {
+    listEthnicity = context.watch<LangueChoose>().isEnglish ? ['White', 'Black', 'Hispanic', 'Other'] : ['Blanc', 'Noir', 'Hispanique', 'Autre'];
+
     return DropdownButtonFormField(
-      value: selectedColor,
+      value: listEthnicity[selectedColor],
       padding: const EdgeInsets.only(top: 10, bottom: 10, right: 20),
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
       ),
-      items: <String>[
-        'Caucasien',
-        'Asiatique',
-        'Métis',
-        'Africain',
-        'Afro-Américain',
-        'Latino-Américain',
-        'Indien'
-      ].map<DropdownMenuItem<String>>((String value) {
+      items: listEthnicity.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -36,7 +34,7 @@ class _SkinColorSelectorState extends State<SkinColorSelector> {
       onChanged: (String? newValue) {
         if (newValue != null) {
           setState(() {
-            selectedColor = newValue;
+            selectedColor = listEthnicity.indexOf(newValue);
           });
           widget.onSelectColor(newValue);
         }
