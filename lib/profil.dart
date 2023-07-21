@@ -119,7 +119,7 @@ class _ProfilState extends State<Profil> {
                         future: translator.translate(textAge, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
                         builder: (context, snapshot) {
                           return Text(
-                            snapshot.hasData ? snapshot.data.toString() : textProfil,
+                            snapshot.hasData ? snapshot.data.toString() : textAge,
                             style: GoogleFonts.lato(
                               fontSize: 25,
                               color: const Color(0xff707070),

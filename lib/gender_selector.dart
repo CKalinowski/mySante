@@ -9,7 +9,7 @@ class GenderSelector extends StatefulWidget {
 }
 
 class _GenderSelectorState extends State<GenderSelector> {
-  String _selectedGender = '';
+  String _selectedGender = 'male';
 
   void _handleGenderSelected(String gender) {
     setState(() {
@@ -29,9 +29,7 @@ class _GenderSelectorState extends State<GenderSelector> {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              color: _selectedGender == 'male'
-                  ? Colors.blue[300]
-                  : Colors.grey[300],
+              color: _selectedGender == 'male' ? Colors.blue[300] : Colors.grey[300],
               borderRadius: BorderRadius.circular(50),
             ),
             child: const Icon(Icons.male, size: 40),
@@ -43,9 +41,7 @@ class _GenderSelectorState extends State<GenderSelector> {
             width: 80,
             height: 80,
             decoration: BoxDecoration(
-              color: _selectedGender == 'female'
-                  ? Colors.pink[300]
-                  : Colors.grey[300],
+              color: _selectedGender == 'female' ? Colors.pink[300] : Colors.grey[300],
               borderRadius: BorderRadius.circular(50),
             ),
             child: const Icon(Icons.female, size: 40),

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'main.dart';
+import 'model/langue_choose.dart';
 import 'page_resultats.dart';
 
 class BTNValider extends StatelessWidget {
-  const BTNValider(this.selectedColor, this.selectedGender, this.selectedAge,
-      this.selectedSymptoms,
-      {super.key});
+  const BTNValider(this.selectedColor, this.selectedGender, this.selectedAge, this.selectedSymptoms, {super.key});
   final String selectedColor;
   final String selectedGender;
   final int selectedAge;
   final List<Map<String, dynamic>> selectedSymptoms;
+  final String textValider = 'Valider';
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +35,26 @@ class BTNValider extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.0),
             ),
           ),
-          const Align(
+          Align(
             alignment: Alignment.center,
             child: SizedBox(
               width: 200.0,
               height: 35.0,
-              child: Text(
-                'Valider',
-                style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 25,
-                  color: Color(0xffffffff),
-                  fontWeight: FontWeight.w700,
-                ),
-                textAlign: TextAlign.center,
-                softWrap: false,
-              ),
+              child: FutureBuilder(
+                  future: translator.translate(textValider, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                  builder: (context, snapshot) {
+                    return Text(
+                      snapshot.hasData ? snapshot.data.toString() : textValider,
+                      style: const TextStyle(
+                        fontFamily: 'Segoe UI',
+                        fontSize: 25,
+                        color: Color(0xffffffff),
+                        fontWeight: FontWeight.w700,
+                      ),
+                      textAlign: TextAlign.center,
+                      softWrap: false,
+                    );
+                  }),
             ),
           ),
         ],
