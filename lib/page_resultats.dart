@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'api.dart';
 import 'header.dart';
+import 'main.dart';
 import 'maladie_item.dart';
 import 'model/disease.dart';
+import 'model/langue_choose.dart';
 
 class Resultats extends StatefulWidget {
   const Resultats(
@@ -26,12 +29,8 @@ class Resultats extends StatefulWidget {
 
 class _ResultatsState extends State<Resultats> {
   late Future<List<Disease>> futureDiseases;
-
-  final List<Map<String, dynamic>> _maladies = [
-    {'maladie': 'Maladie 1', 'id': '1'},
-    {'maladie': 'Maladie 2', 'id': '2'},
-    // Ajoutez plus de maladies ici si nécessaire
-  ];
+  String textResultats = 'Vos résultats';
+  String textResultatsPossibles = 'Voici les résultats possibles liés à vos symptômes :';
 
   @override
   void initState() {
@@ -62,15 +61,19 @@ class _ResultatsState extends State<Resultats> {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 20),
-              child: Text(
-                'Vos résultats',
-                style: GoogleFonts.lato(
-                  fontSize: 25,
-                  color: const Color(0xff707070),
-                  fontWeight: FontWeight.w700,
-                ),
-                textAlign: TextAlign.center,
-              ),
+              child: FutureBuilder(
+                  future: translator.translate(textResultats, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                  builder: (context, snapshot) {
+                    return Text(
+                      snapshot.hasData ? snapshot.data.toString() : textResultats,
+                      style: GoogleFonts.lato(
+                        fontSize: 25,
+                        color: const Color(0xff707070),
+                        fontWeight: FontWeight.w700,
+                      ),
+                      textAlign: TextAlign.center,
+                    );
+                  }),
             ),
             Container(
               width: 350,
@@ -94,22 +97,24 @@ class _ResultatsState extends State<Resultats> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Voici les résultats possibles liés à vos symptômes :',
-                    style: GoogleFonts.lato(
-                      fontSize: 20,
-                      color: const Color(0xff707070),
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
+                  FutureBuilder(
+                      future: translator.translate(textResultatsPossibles, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                      builder: (context, snapshot) {
+                        return Text(
+                          snapshot.hasData ? snapshot.data.toString() : textResultatsPossibles,
+                          style: GoogleFonts.lato(
+                            fontSize: 20,
+                            color: const Color(0xff707070),
+                          ),
+                          textAlign: TextAlign.left,
+                        );
+                      }),
                   const SizedBox(height: 20),
                   Expanded(
                     child: FutureBuilder<List<Disease>>(
                       future: futureDiseases,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<List<Disease>> snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
+                      builder: (BuildContext context, AsyncSnapshot<List<Disease>> snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
                           return const Center(
                             child: CircularProgressIndicator(),
                           );
@@ -125,10 +130,8 @@ class _ResultatsState extends State<Resultats> {
                             itemCount: diseases.length,
                             itemBuilder: (BuildContext context, int index) {
                               final disease = diseases[index];
-                              final diseaseNameFr =
-                                  disease.name?.nomFr ?? 'Nom inconnu';
-                              final diseaseNameEn =
-                                  disease.name?.nomEn ?? 'Unknown Name';
+                              final diseaseNameFr = disease.name?.nomFr ?? 'Nom inconnu';
+                              final diseaseNameEn = disease.name?.nomEn ?? 'Unknown Name';
                               return MaladieItem(
                                 maladie: diseaseNameFr,
                                 id: disease.id.toString(),

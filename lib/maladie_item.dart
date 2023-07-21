@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'main.dart';
 import 'maladie_detail.dart';
 import 'model/disease.dart';
+import 'model/langue_choose.dart';
 
 class MaladieItem extends StatelessWidget {
   const MaladieItem({
@@ -14,6 +17,7 @@ class MaladieItem extends StatelessWidget {
   final String maladie;
   final String id;
   final Disease diseases;
+  final String textVoir = 'Voir +';
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,14 @@ class MaladieItem extends StatelessWidget {
               foregroundColor: Colors.white,
               backgroundColor: const Color(0xff54cbc4),
             ),
-            child: const Text('Voir +'),
+            child: FutureBuilder(
+                future: translator.translate(textVoir, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                builder: (context, snapshot) {
+                  return Text(
+                    snapshot.hasData ? snapshot.data.toString() : textVoir,
+                    textAlign: TextAlign.center,
+                  );
+                }),
           ),
         ],
       ),
