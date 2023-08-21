@@ -37,11 +37,14 @@ class MaladieItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8.0),
-              Text(
-                maladie,
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  color: Color(0xff707070),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 2,
+                child: Text(
+                  maladie,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    color: Color(0xff707070),
+                  ),
                 ),
               ),
             ],
@@ -60,7 +63,9 @@ class MaladieItem extends StatelessWidget {
               backgroundColor: const Color(0xff54cbc4),
             ),
             child: FutureBuilder(
-                future: translator.translate(textVoir, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                future: translator.translate(textVoir,
+                    from: 'fr',
+                    to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
                 builder: (context, snapshot) {
                   return Text(
                     snapshot.hasData ? snapshot.data.toString() : textVoir,

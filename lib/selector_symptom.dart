@@ -27,6 +27,8 @@ class _SymptomSelectorState extends State<SymptomSelector> {
   String textNiveau = 'Le niveau entre 1 et 10';
   String textValider = 'Valider';
   String textRechercher = 'Rechercher ...';
+  String textVotreSymptome = "Votre symptôme ...";
+  String textNiveauSymptome = "Niveau";
   final TextEditingController textEditingController = TextEditingController();
 
   @override
@@ -133,23 +135,33 @@ class _SymptomSelectorState extends State<SymptomSelector> {
                             right: 8,
                             left: 8,
                           ),
-                          child: TextFormField(
-                            expands: true,
-                            maxLines: null,
-                            controller: textEditingController,
-                            decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 8,
-                              ),
-                              hintText: 'Votre symptôme ...',
-                              hintStyle: const TextStyle(fontSize: 12),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                          ),
+                          child: FutureBuilder(
+                              future: translator.translate(textVotreSymptome,
+                                  from: 'fr',
+                                  to: context.watch<LangueChoose>().isEnglish
+                                      ? 'en'
+                                      : 'fr'),
+                              builder: (context, snapshot) {
+                                return TextFormField(
+                                  expands: true,
+                                  maxLines: null,
+                                  controller: textEditingController,
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 8,
+                                    ),
+                                    hintText: snapshot.hasData
+                                        ? snapshot.data.toString()
+                                        : textVotreSymptome,
+                                    hintStyle: const TextStyle(fontSize: 12),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                );
+                              }),
                         ),
                         searchMatchFn: (item, searchValue) {
                           Symptom symptomLangue = symptoms.firstWhere(

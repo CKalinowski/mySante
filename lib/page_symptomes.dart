@@ -25,6 +25,7 @@ class _SymptomesState extends State<Symptomes> {
   String textWhatSymptoms = 'Quels sont vos symptômes ?';
   String textSelectedSymptoms = 'Symptômes sélectionnés :';
   String textSymptoms = 'Symptômes';
+  String textLevel = 'Niveau';
   void _handleSymptomSelected(Symptom symptom, int value) {
     setState(() {
       _selectedSymptoms.add({'symptom': symptom, 'value': value});
@@ -140,44 +141,62 @@ class _SymptomesState extends State<Symptomes> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
-                                          child: RichText(
-                                            text: TextSpan(
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                              children: [
-                                                TextSpan(
-                                                  text: context
+                                          child: FutureBuilder(
+                                              future: translator.translate(
+                                                  textLevel,
+                                                  from: 'fr',
+                                                  to: context
                                                           .watch<LangueChoose>()
                                                           .isEnglish
-                                                      ? _selectedSymptoms[index]
-                                                              ['symptom']
-                                                          .nomEn
-                                                      : _selectedSymptoms[index]
-                                                              ['symptom']
-                                                          .nomFr,
-                                                  style: GoogleFonts.lato(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w700,
-                                                    color:
-                                                        const Color(0xff707070),
+                                                      ? 'en'
+                                                      : 'fr'),
+                                              builder: (context, snapshot) {
+                                                return RichText(
+                                                  text: TextSpan(
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                    ),
+                                                    children: [
+                                                      TextSpan(
+                                                        text: context
+                                                                .watch<
+                                                                    LangueChoose>()
+                                                                .isEnglish
+                                                            ? _selectedSymptoms[
+                                                                        index]
+                                                                    ['symptom']
+                                                                .nomEn
+                                                            : _selectedSymptoms[
+                                                                        index]
+                                                                    ['symptom']
+                                                                .nomFr,
+                                                        style: GoogleFonts.lato(
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: const Color(
+                                                              0xff707070),
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text: snapshot.hasData
+                                                            ? ' - ${snapshot.data} : ${_selectedSymptoms[index]['value']}'
+                                                            : ' - $textLevel : ${_selectedSymptoms[index]['value']}',
+                                                        style: GoogleFonts.lato(
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: const Color(
+                                                              0xff707070),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                                TextSpan(
-                                                  text:
-                                                      ' - niveau : ${_selectedSymptoms[index]['value']}',
-                                                  style: GoogleFonts.lato(
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w500,
-                                                    color:
-                                                        const Color(0xff707070),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+                                                );
+                                              }),
                                         ),
                                         GestureDetector(
                                           onTap: () {

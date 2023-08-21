@@ -168,7 +168,6 @@ class _ResultatsState extends State<Resultats> {
                       },
                     ),
                   ),
-                  // ajout phrase en bas de page
                   FutureBuilder(
                       future: translator.translate(textVerifMedecin,
                           from: 'fr',
