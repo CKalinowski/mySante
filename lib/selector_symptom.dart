@@ -4,12 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
+import 'api.dart';
 import 'main.dart';
 import 'model/langue_choose.dart';
 import 'model/symptom.dart';
 
 class SymptomSelector extends StatefulWidget {
-  const SymptomSelector({Key? key, this.onSelected, required this.symptomSelected}) : super(key: key);
+  const SymptomSelector(
+      {Key? key, this.onSelected, required this.symptomSelected})
+      : super(key: key);
   final void Function(Symptom symptom, int value)? onSelected;
 
   final List<Symptom> symptomSelected;
@@ -23,6 +26,7 @@ class _SymptomSelectorState extends State<SymptomSelector> {
   String textSymptomes = 'Symptômes';
   String textNiveau = 'Le niveau entre 1 et 10';
   String textValider = 'Valider';
+  String textRechercher = 'Rechercher ...';
   final TextEditingController textEditingController = TextEditingController();
 
   @override
@@ -36,7 +40,9 @@ class _SymptomSelectorState extends State<SymptomSelector> {
     return Column(
       children: [
         FutureBuilder(
-            future: translator.translate(textSymptomes, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+            future: translator.translate(textSymptomes,
+                from: 'fr',
+                to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
             builder: (context, snapshot) {
               return Text(
                 snapshot.hasData ? snapshot.data.toString() : textSymptomes,
@@ -57,7 +63,7 @@ class _SymptomSelectorState extends State<SymptomSelector> {
             ),
           ),
           child: FutureBuilder(
-            //future: Api.getSymptoms(),
+            future: Api.getSymptoms(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final List<Symptom> symptoms = snapshot.data as List<Symptom>;
@@ -69,19 +75,32 @@ class _SymptomSelectorState extends State<SymptomSelector> {
                         ),
                       ),
                       isExpanded: true,
-                      hint: Text(
-                        'Rechercher ...',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Theme.of(context).hintColor,
-                        ),
-                      ),
+                      hint: FutureBuilder(
+                          future: translator.translate(textRechercher,
+                              from: 'fr',
+                              to: context.watch<LangueChoose>().isEnglish
+                                  ? 'en'
+                                  : 'fr'),
+                          builder: (context, snapshot) {
+                            return Text(
+                              snapshot.hasData
+                                  ? snapshot.data.toString()
+                                  : textRechercher,
+                              style: GoogleFonts.lato(
+                                color: Theme.of(context).hintColor,
+                              ),
+                              textAlign: TextAlign.left,
+                            );
+                          }),
                       items: symptoms
-                          .where((element) => !widget.symptomSelected.contains(element))
+                          .where((element) =>
+                              !widget.symptomSelected.contains(element))
                           .map((symptom) => DropdownMenuItem(
                                 value: symptom.id,
                                 child: Text(
-                                  context.watch<LangueChoose>().isEnglish ? symptom.nomEn : symptom.nomFr,
+                                  context.watch<LangueChoose>().isEnglish
+                                      ? symptom.nomEn
+                                      : symptom.nomFr,
                                   style: const TextStyle(
                                     fontSize: 14,
                                   ),
@@ -92,7 +111,8 @@ class _SymptomSelectorState extends State<SymptomSelector> {
                       onChanged: (value) {
                         print(value);
                         setState(() {
-                          _selectedSymptom = symptoms.firstWhere((element) => element.id == value);
+                          _selectedSymptom = symptoms
+                              .firstWhere((element) => element.id == value);
                         });
                       },
                       buttonStyleData: const ButtonStyleData(
@@ -132,8 +152,11 @@ class _SymptomSelectorState extends State<SymptomSelector> {
                           ),
                         ),
                         searchMatchFn: (item, searchValue) {
-                          Symptom symptomLangue = symptoms.firstWhere((element) => element.id == item.value);
-                          return (context.read<LangueChoose>().isEnglish ? symptomLangue.nomEn : symptomLangue.nomFr)
+                          Symptom symptomLangue = symptoms.firstWhere(
+                              (element) => element.id == item.value);
+                          return (context.read<LangueChoose>().isEnglish
+                                  ? symptomLangue.nomEn
+                                  : symptomLangue.nomFr)
                               .toLowerCase()
                               .contains(searchValue.toLowerCase());
                         },
@@ -155,7 +178,9 @@ class _SymptomSelectorState extends State<SymptomSelector> {
         ),
         const SizedBox(height: 10),
         FutureBuilder(
-            future: translator.translate(textNiveau, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+            future: translator.translate(textNiveau,
+                from: 'fr',
+                to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
             builder: (context, snapshot) {
               return Text(
                 snapshot.hasData ? snapshot.data.toString() : textNiveau,
@@ -190,7 +215,10 @@ class _SymptomSelectorState extends State<SymptomSelector> {
               // reduction de la taille du cercle
               size: 100,
               customColors: CustomSliderColors(
-                progressBarColors: [const Color(0xff16679a), const Color(0xff16679a)],
+                progressBarColors: [
+                  const Color(0xff16679a),
+                  const Color(0xff16679a)
+                ],
                 trackColor: const Color(0xff16679a).withOpacity(0.2),
               ),
               customWidths: CustomSliderWidths(progressBarWidth: 10),
@@ -216,7 +244,9 @@ class _SymptomSelectorState extends State<SymptomSelector> {
             }
           },
           child: FutureBuilder(
-              future: translator.translate(textValider, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+              future: translator.translate(textValider,
+                  from: 'fr',
+                  to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
               builder: (context, snapshot) {
                 return Text(
                   snapshot.hasData ? snapshot.data.toString() : textValider,

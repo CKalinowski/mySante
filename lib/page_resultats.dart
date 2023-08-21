@@ -30,7 +30,10 @@ class Resultats extends StatefulWidget {
 class _ResultatsState extends State<Resultats> {
   late Future<List<Disease>> futureDiseases;
   String textResultats = 'Vos résultats';
-  String textResultatsPossibles = 'Voici les résultats possibles liés à vos symptômes :';
+  String textResultatsPossibles =
+      'Voici les résultats possibles liés à vos symptômes :';
+  String textVerifMedecin =
+      "Veuillez noter que ces résultats doivent être confirmés par un professionnel de la santé qualifié pour obtenir une évaluation médicale précise.";
 
   @override
   void initState() {
@@ -62,10 +65,16 @@ class _ResultatsState extends State<Resultats> {
             Container(
               margin: const EdgeInsets.only(top: 20),
               child: FutureBuilder(
-                  future: translator.translate(textResultats, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                  future: translator.translate(textResultats,
+                      from: 'fr',
+                      to: context.watch<LangueChoose>().isEnglish
+                          ? 'en'
+                          : 'fr'),
                   builder: (context, snapshot) {
                     return Text(
-                      snapshot.hasData ? snapshot.data.toString() : textResultats,
+                      snapshot.hasData
+                          ? snapshot.data.toString()
+                          : textResultats,
                       style: GoogleFonts.lato(
                         fontSize: 25,
                         color: const Color(0xff707070),
@@ -98,10 +107,16 @@ class _ResultatsState extends State<Resultats> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   FutureBuilder(
-                      future: translator.translate(textResultatsPossibles, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                      future: translator.translate(textResultatsPossibles,
+                          from: 'fr',
+                          to: context.watch<LangueChoose>().isEnglish
+                              ? 'en'
+                              : 'fr'),
                       builder: (context, snapshot) {
                         return Text(
-                          snapshot.hasData ? snapshot.data.toString() : textResultatsPossibles,
+                          snapshot.hasData
+                              ? snapshot.data.toString()
+                              : textResultatsPossibles,
                           style: GoogleFonts.lato(
                             fontSize: 20,
                             color: const Color(0xff707070),
@@ -113,8 +128,10 @@ class _ResultatsState extends State<Resultats> {
                   Expanded(
                     child: FutureBuilder<List<Disease>>(
                       future: futureDiseases,
-                      builder: (BuildContext context, AsyncSnapshot<List<Disease>> snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
+                      builder: (BuildContext context,
+                          AsyncSnapshot<List<Disease>> snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           return const Center(
                             child: CircularProgressIndicator(),
                           );
@@ -130,10 +147,14 @@ class _ResultatsState extends State<Resultats> {
                             itemCount: diseases.length,
                             itemBuilder: (BuildContext context, int index) {
                               final disease = diseases[index];
-                              final diseaseNameFr = disease.name?.nomFr ?? 'Nom inconnu';
-                              final diseaseNameEn = disease.name?.nomEn ?? 'Unknown Name';
+                              final diseaseNameFr =
+                                  disease.name?.nomFr ?? 'Nom inconnu';
+                              final diseaseNameEn =
+                                  disease.name?.nomEn ?? 'Unknown Name';
                               return MaladieItem(
-                                maladie: diseaseNameFr,
+                                maladie: context.watch<LangueChoose>().isEnglish
+                                    ? diseaseNameEn
+                                    : diseaseNameFr,
                                 id: disease.id.toString(),
                                 diseases: disease,
                               );
@@ -147,6 +168,28 @@ class _ResultatsState extends State<Resultats> {
                       },
                     ),
                   ),
+                  // ajout phrase en bas de page
+                  FutureBuilder(
+                      future: translator.translate(textVerifMedecin,
+                          from: 'fr',
+                          to: context.watch<LangueChoose>().isEnglish
+                              ? 'en'
+                              : 'fr'),
+                      builder: (context, snapshot) {
+                        return Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          child: Text(
+                            snapshot.hasData
+                                ? snapshot.data.toString()
+                                : textVerifMedecin,
+                            style: GoogleFonts.lato(
+                              fontSize: 15,
+                              color: const Color(0xff707070),
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        );
+                      }),
                 ],
               ),
             ),

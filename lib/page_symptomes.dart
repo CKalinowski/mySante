@@ -10,7 +10,8 @@ import 'model/symptom.dart';
 import 'selector_symptom.dart';
 
 class Symptomes extends StatefulWidget {
-  const Symptomes(this.selectedColor, this.selectedGender, this.selectedAge, {super.key});
+  const Symptomes(this.selectedColor, this.selectedGender, this.selectedAge,
+      {super.key});
   final String selectedColor;
   final String selectedGender;
   final int selectedAge;
@@ -49,10 +50,16 @@ class _SymptomesState extends State<Symptomes> {
               Container(
                 margin: const EdgeInsets.only(top: 20),
                 child: FutureBuilder(
-                    future: translator.translate(textWhatSymptoms, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                    future: translator.translate(textWhatSymptoms,
+                        from: 'fr',
+                        to: context.watch<LangueChoose>().isEnglish
+                            ? 'en'
+                            : 'fr'),
                     builder: (context, snapshot) {
                       return Text(
-                        snapshot.hasData ? snapshot.data.toString() : textWhatSymptoms,
+                        snapshot.hasData
+                            ? snapshot.data.toString()
+                            : textWhatSymptoms,
                         style: GoogleFonts.lato(
                           fontSize: 25,
                           color: const Color(0xff707070),
@@ -85,14 +92,22 @@ class _SymptomesState extends State<Symptomes> {
                     children: [
                       SymptomSelector(
                         onSelected: _handleSymptomSelected,
-                        symptomSelected: _selectedSymptoms.map((e) => e['symptom'] as Symptom).toList(),
+                        symptomSelected: _selectedSymptoms
+                            .map((e) => e['symptom'] as Symptom)
+                            .toList(),
                       ),
                       const SizedBox(height: 20),
                       FutureBuilder(
-                          future: translator.translate(textSelectedSymptoms, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                          future: translator.translate(textSelectedSymptoms,
+                              from: 'fr',
+                              to: context.watch<LangueChoose>().isEnglish
+                                  ? 'en'
+                                  : 'fr'),
                           builder: (context, snapshot) {
                             return Text(
-                              snapshot.hasData ? snapshot.data.toString() : textSelectedSymptoms,
+                              snapshot.hasData
+                                  ? snapshot.data.toString()
+                                  : textSelectedSymptoms,
                               style: GoogleFonts.lato(
                                 fontSize: 25,
                                 color: const Color(0xff707070),
@@ -106,7 +121,8 @@ class _SymptomesState extends State<Symptomes> {
                           itemCount: _selectedSymptoms.length,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
                               child: Row(
                                 children: [
                                   Container(
@@ -120,7 +136,8 @@ class _SymptomesState extends State<Symptomes> {
                                   const SizedBox(width: 10),
                                   Expanded(
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           child: RichText(
@@ -132,19 +149,30 @@ class _SymptomesState extends State<Symptomes> {
                                               ),
                                               children: [
                                                 TextSpan(
-                                                  text: _selectedSymptoms[index]['symptom'].nomFr,
+                                                  text: context
+                                                          .watch<LangueChoose>()
+                                                          .isEnglish
+                                                      ? _selectedSymptoms[index]
+                                                              ['symptom']
+                                                          .nomEn
+                                                      : _selectedSymptoms[index]
+                                                              ['symptom']
+                                                          .nomFr,
                                                   style: GoogleFonts.lato(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w700,
-                                                    color: const Color(0xff707070),
+                                                    color:
+                                                        const Color(0xff707070),
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: ' - niveau : ${_selectedSymptoms[index]['value']}',
+                                                  text:
+                                                      ' - niveau : ${_selectedSymptoms[index]['value']}',
                                                   style: GoogleFonts.lato(
                                                     fontSize: 13,
                                                     fontWeight: FontWeight.w500,
-                                                    color: const Color(0xff707070),
+                                                    color:
+                                                        const Color(0xff707070),
                                                   ),
                                                 ),
                                               ],
@@ -157,7 +185,8 @@ class _SymptomesState extends State<Symptomes> {
                                               _selectedSymptoms.removeAt(index);
                                             });
                                           },
-                                          child: const Icon(Icons.close, color: Colors.red),
+                                          child: const Icon(Icons.close,
+                                              color: Colors.red),
                                         ),
                                       ],
                                     ),
