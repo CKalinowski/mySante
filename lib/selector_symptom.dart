@@ -69,6 +69,11 @@ class _SymptomSelectorState extends State<SymptomSelector> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final List<Symptom> symptoms = snapshot.data as List<Symptom>;
+                if (context.watch<LangueChoose>().isEnglish) {
+                  symptoms.sort((a, b) => a.nomEn.compareTo(b.nomEn));
+                } else {
+                  symptoms.sort((a, b) => a.nomFr.compareTo(b.nomFr));
+                }
                 return DropdownButtonHideUnderline(
                   child: DropdownButton2<int?>(
                       dropdownStyleData: DropdownStyleData(

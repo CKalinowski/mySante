@@ -31,7 +31,7 @@ class _ResultatsState extends State<Resultats> {
   late Future<List<Disease>> futureDiseases;
   String textResultats = 'Vos résultats';
   String textResultatsPossibles =
-      'Voici les résultats possibles liés à vos symptômes :';
+      'Voici les résultats possibles liés à vos symptômes du plus au moins probable :';
   String textVerifMedecin =
       "Veuillez noter que ces résultats doivent être confirmés par un professionnel de la santé qualifié pour obtenir une évaluation médicale précise.";
 
