@@ -24,7 +24,7 @@ class _SymptomSelectorState extends State<SymptomSelector> {
   Symptom? _selectedSymptom;
   int _selectedValue = 1;
   String textSymptomes = 'Symptômes';
-  String textNiveau = 'Le niveau entre 1 et 10';
+  String textNiveau = 'Intensité du symptôme entre 1 et 10';
   String textValider = 'Valider';
   String textRechercher = 'Rechercher ...';
   String textVotreSymptome = "Votre symptôme ...";
@@ -202,7 +202,7 @@ class _SymptomSelectorState extends State<SymptomSelector> {
               return Text(
                 snapshot.hasData ? snapshot.data.toString() : textNiveau,
                 style: GoogleFonts.lato(
-                  fontSize: 20,
+                  fontSize: 18,
                   color: const Color(0xff707070),
                 ),
                 textAlign: TextAlign.left,
