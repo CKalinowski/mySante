@@ -22,7 +22,7 @@ class _AgeSelectorState extends State<AgeSelector> {
       width: 350,
       child: Center(
         child: SleekCircularSlider(
-          min: 0,
+          min: 18,
           max: 100,
           initialValue: selectedAge.toDouble(),
           onChange: (double value) {
@@ -33,10 +33,16 @@ class _AgeSelectorState extends State<AgeSelector> {
           innerWidget: (double value) {
             return Center(
               child: FutureBuilder(
-                  future: translator.translate(textAge, from: 'fr', to: context.watch<LangueChoose>().isEnglish ? 'en' : 'fr'),
+                  future: translator.translate(textAge,
+                      from: 'fr',
+                      to: context.watch<LangueChoose>().isEnglish
+                          ? 'en'
+                          : 'fr'),
                   builder: (context, snapshot) {
                     return Text(
-                      snapshot.hasData ? '$selectedAge ${snapshot.data}' : '$selectedAge $textAge',
+                      snapshot.hasData
+                          ? '$selectedAge ${snapshot.data}'
+                          : '$selectedAge $textAge',
                       style: const TextStyle(fontSize: 20),
                     );
                   }),
@@ -44,7 +50,10 @@ class _AgeSelectorState extends State<AgeSelector> {
           },
           appearance: CircularSliderAppearance(
             customColors: CustomSliderColors(
-              progressBarColors: [const Color(0xff16679a), const Color(0xff16679a)],
+              progressBarColors: [
+                const Color(0xff16679a),
+                const Color(0xff16679a)
+              ],
               trackColor: const Color(0xff16679a).withOpacity(0.2),
             ),
             customWidths: CustomSliderWidths(progressBarWidth: 10),
