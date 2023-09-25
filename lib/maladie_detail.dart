@@ -22,17 +22,21 @@ class MaladieDetail extends StatelessWidget {
   final String textMedicamentsNonDisponible = 'Médicaments non disponible';
   final String textDepistage = 'Dépistage';
   final String textDepistageNonDisponible = 'Dépistage non disponible';
+  final String textMaladie = 'Maladie';
 
   @override
   Widget build(BuildContext context) {
     String proceduresText = '';
     if (disease.testsProceduresList != null) {
       proceduresText = disease.testsProceduresList!
-          .map((testProcedure) =>
-              testProcedure.nomFr ?? 'Procédure non disponible')
+          .map((testProcedure) => context.watch<LangueChoose>().isEnglish
+              ? testProcedure.nomEn ?? 'Test procedure not available'
+              : testProcedure.nomFr ?? 'Procédure non disponible')
           .join('\n');
     } else {
-      proceduresText = 'Aucune procédure de test disponible.';
+      proceduresText = context.watch<LangueChoose>().isEnglish
+          ? 'Test procedure not available'
+          : 'Aucune procédure de test disponible.';
     }
     return Scaffold(
       appBar: const Header(
@@ -48,7 +52,9 @@ class MaladieDetail extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 20),
               child: Text(
-                disease.name?.nomFr ?? 'Maladie',
+                context.watch<LangueChoose>().isEnglish
+                    ? disease.name?.nomEn ?? 'Description of the disease'
+                    : disease.name?.nomFr ?? 'Description de la maladie',
                 style: GoogleFonts.lato(
                   fontSize: 25,
                   color: const Color(0xff707070),
@@ -66,7 +72,9 @@ class MaladieDetail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      disease.description?.nomFr ?? 'Maladie',
+                      context.watch<LangueChoose>().isEnglish
+                          ? disease.description?.nomEn ?? 'Disease'
+                          : disease.description?.nomFr ?? 'Maladie',
                       style: GoogleFonts.lato(fontSize: 15.0),
                       textAlign: TextAlign.center,
                     ),
